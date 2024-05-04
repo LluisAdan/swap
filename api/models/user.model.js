@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const categories = require('../data/categories.json');
 const genre = require('../data/genre.json');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
   {
@@ -60,11 +61,30 @@ const userSchema = new Schema(
         ret.id = ret._id,
         delete ret._id;
         delete ret.__v;
+        delete ret.password;
         return ret;
       }
     }
   }
 );
+
+userSchema.pre('save', function(next) {
+  if (this.isModified('password')) {
+    bcrypt
+      .hash(this.password, 10)
+      .then((hash) => {
+        this.password = hash;
+        next();
+      })
+      .catch(next);
+  } else {
+    next();
+  };
+});
+
+userSchema.method('checkPassword', function (password) {
+  return bcrypt.compare(password, this.password);
+});
 
 userSchema.virtual('ratings', {
   ref: 'UserRating',
