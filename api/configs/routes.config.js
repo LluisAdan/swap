@@ -9,22 +9,17 @@ const auth = require('../middlewares/auth.middleware');
 router.post('/products', auth.checkAuth, products.create);
 router.get('/products', products.list);
 router.get('/products/:id', products.detail);
-router.patch('/products/:id', auth.checkAuth, products.update);
-router.delete('/products/:id', auth.checkAuth, products.delete);
+router.patch('/products/:id', auth.checkAuth, auth.isOwnerProduct, products.update);
+router.delete('/products/:id', auth.checkAuth, auth.isOwnerProduct, products.delete);
 
 // User's routes
 router.post('/users', users.create);
-router.get('/users', users.list);
 router.get('/users/:id', auth.checkAuth, users.detail);
-router.patch('/users/:id', auth.checkAuth, users.update);
-router.delete('/users/:id', auth.checkAuth, users.delete);
+router.patch('/users/:id', auth.checkAuth, auth.isOwnerProfile, users.update);
+router.delete('/users/:id', auth.checkAuth, auth.isOwnerProfile, users.delete);
 router.post('/login', users.login);
 
-// Rating's routes ??????????????????????????????
-router.post('/ratings', auth.checkAuth, ratings.create);
-router.get('/ratings', ratings.list);
-router.get('/ratings/:id', ratings.detail);
-router.patch('/ratings/:id', auth.checkAuth, ratings.update);
-router.delete('/ratings/:id', auth.checkAuth, ratings.delete);
+// Rating's routes
+router.post('/users/:userId/ratings', auth.checkAuth, ratings.create);
 
 module.exports = router;

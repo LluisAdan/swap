@@ -2,17 +2,16 @@ const mongoose = require('mongoose');
 const Product = require('../models/product.model');
 
 module.exports.create = (req, res, next) => {
-  Product.create(req.body)
-    /*
-    ({
+  Product.create({
     title: req.body.title,
     description: req.body.description,
     image: req.body.image,
     category: req.body.category,
-    preferences: req.body.preferences
-    !!!!!!! geojson
+    preferences: req.body.preferences,
+    price: req.body.price,
+    location: req.body.location, // geojson
+    owner: req.user.id
     })
-    */
     .then((product) => {
       res.status(201).json(product);
     })

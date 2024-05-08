@@ -1,22 +1,27 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require('./user.model')
 
 const ratingsSchema = new Schema(
     {
         rating: {
-            type: Number,
-            required: [true, 'Rating is required'],
-            min: 0,
-            max: 5
+          type: Number,
+          required: [true, 'Rating is required'],
+          min: 0,
+          max: 5
         },
         title: {
           type: String,
-          required: [true, 'Comment title is required']
+          required: [true, 'Rating title is required']
         },
-        text: {
-            type: String
+        text: String,
+        owner: {
+          type: Schema.Types.ObjectId,
+          ref: "User"
         },
+        target: {
+          type: Schema.Types.ObjectId,
+          ref: "User"
+        }
     },
     {
         timestamps: true,
@@ -30,12 +35,6 @@ const ratingsSchema = new Schema(
         }
       }
 );
-
-ratingsSchema.virtual('owner', {
-    ref: 'UserRatings',
-    localField: '_id',
-    foreignField: 'ratings',
-  });
 
 const Ratings = mongoose.model('Rating', ratingsSchema);
 module.exports = Ratings;
