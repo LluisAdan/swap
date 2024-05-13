@@ -1,11 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/api.service';
+import { useAlert } from '../../contexts/alert-context/alert.context';
 
 function Register() {
   const navigate = useNavigate();
+  const { showAlert } = useAlert();
   
   const {
     register,
@@ -13,22 +14,18 @@ function Register() {
     formState: { errors },
   } = useForm();
 
-  const [error, setError] = useState(); 
-
   async function onSubmit(data) {
     try {
-      setError(false);
       await createUser(data);
       navigate('/login');
     } catch (err) {
-      setError(true);
+      showAlert('Invalid register');
     }
   };
   
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {error && <div className="alert alert-danger">Invalid register</div>}
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name *
@@ -68,7 +65,7 @@ function Register() {
           <label htmlFor="avatar" className="form-label">
             Avatar
           </label>
-          <input type="file" id="avatar" className={`form-control ${errors.avatar ? "is-invalid" : ""}`} {...register('avatar')} />
+          <input type="text" id="avatar" className={`form-control ${errors.avatar ? "is-invalid" : ""}`} {...register('avatar')} />
         </div>
         
         <div className="mb-3">

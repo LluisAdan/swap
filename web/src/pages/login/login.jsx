@@ -1,27 +1,29 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { login, storeAccessToken } from '../../services/api.service';
+import { useContext } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../contexts/auth.context';
+import { useAlert } from '../../contexts/alert-context/alert.context';
 
 function Login() {
   const navigate = useNavigate();
+  const { showAlert } = useAlert();
+  const { doLogin } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const [error, setError] = useState();
-
   async function onSubmit(data) { 
     try {
-      const response = await login(data);
-      storeAccessToken(response.data.accessToken);
+      await doLogin(data);
+
       navigate('/');
     } catch (err) {
-      setError(true);
+      showAlert('Invalid credentials');
     }
   };
   
@@ -34,7 +36,6 @@ function Login() {
 
         <div className="mt-3 mb-3">
             <form onSubmit={handleSubmit(onSubmit)}>
-            {error && <div className="alert alert-danger" >Invalid credentials</div>}
                 <div className="form mb-3">
                     <input type="text" id="username" className={`form-control form-control-lg ${errors.username ? "is-invalid" : ""}`} {...register("username")} placeholder="Username" />
                 </div>

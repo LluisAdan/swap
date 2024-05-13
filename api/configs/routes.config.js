@@ -18,6 +18,7 @@ router.get('/users/:id', auth.checkAuth, users.detail);
 router.patch('/users/:id', auth.checkAuth, auth.isOwnerProfile, users.update);
 router.delete('/users/:id', auth.checkAuth, auth.isOwnerProfile, users.delete);
 router.post('/login', users.login);
+router.get('/profile', auth.checkAuth, users.profile);
 
 // Rating's routes
 router.post('/users/:userId/ratings', auth.checkAuth, ratings.create);

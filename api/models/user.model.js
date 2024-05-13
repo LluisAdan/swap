@@ -20,7 +20,10 @@ const userSchema = new Schema(
       minLength: [2, 'Username needs at least 2 chars'],
       unique: true
     },
-    avatar: String,
+    avatar: {
+      type: String,
+      default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+    },
     email: {
       type: String,
       required: 'Email is required',
@@ -45,9 +48,9 @@ const userSchema = new Schema(
       type: String,
       enum: categories
     },
-    history: String,
+    history: [Object],
     favoriteProducts: {
-      type: [String]
+      type: [Object]
     }
   },
   {

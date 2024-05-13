@@ -1,0 +1,26 @@
+
+.navbar {
+  background-color: #7cb9b5;
+  height: 100px;
+}
+
+.btn {
+  color: white;
+}
+
+.btn-register, .btn-add-product {
+  border: 2px solid white;
+  border-radius: 20px;
+}
+
+.btns {
+  width: 600px;
+}
+
+.btn-profile {
+  text-decoration: none;
+}
+
+.btn-add-product {
+  margin: 15px;
+}

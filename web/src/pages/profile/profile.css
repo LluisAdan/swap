@@ -1,0 +1,21 @@
+
+/*
+.info-user {
+  display:flex;
+    justify-content: center;
+    align-items: center;
+}
+*/
+
+.name-user {
+  margin-left: 10px;
+  width: 300px;
+}
+
+.info-rating {
+  margin-top: 5px;
+}
+
+.edit-profile {
+  margin-top: 103px;
+}

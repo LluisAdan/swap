@@ -3,33 +3,43 @@ const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 
 module.exports.create = (req, res, next) => {
-  const userCreate = {
-    name: req.body.name,
-    lastName: req.body.lastName,
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-    address: req.body.address,
-    birthDate: req.body.birthDate,
-    genre: req.body.genre,
-    preferences: req.body.preferences
-  };
-
-  if (req.file) {
-    userCreate.avatar = req.file.path;
-  }
-
-  User.create(userCreate)
-  .then((user) => {
-    res.status(201).json(user);
-  })
-  .catch((err) => {
-    if (err instanceof mongoose.Error.ValidationError) {
-      res.status(400).json(err.errors);
-    } else {
-      next(err);
-    };
-  });
+  User.findOne({ username: req.body.username })
+    .then((user) => {
+      if (user) {
+        res.status(409).json({message: "Username already exists"});
+      } else {
+        const userCreate = {
+          name: req.body.name,
+          lastName: req.body.lastName,
+          username: req.body.username,
+          email: req.body.email,
+          avatar: req.body.avatar,
+          password: req.body.password,
+          address: req.body.address,
+          birthDate: req.body.birthDate,
+          genre: req.body.genre,
+          preferences: req.body.preferences
+        };
+        
+        /*
+        if (req.file) {
+          userCreate.avatar = req.file.path;
+        }
+        */
+      
+        User.create(userCreate)
+          .then((user) => {
+            res.status(201).json(user);
+          })
+          .catch((err) => {
+            if (err instanceof mongoose.Error.ValidationError) {
+              res.status(400).json(err.errors);
+            } else {
+              next(err);
+            };
+          });
+      }
+    });
 };
 
 module.exports.detail = (req, res, next) => {
@@ -123,3 +133,5 @@ module.exports.login = (req, res, next) => {
     })
     .catch(next)
 };
+
+module.exports.profile = (req, res, next) => res.json(req.user);

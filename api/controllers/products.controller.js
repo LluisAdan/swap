@@ -25,10 +25,16 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.list = (req, res, next) => {
-  Product.find()
-    .then((products) => {
-      res.json(products);
-    })
+  const { category, limit = process.env.DEFAULT_LIMIT, page = 0 } = req.query;
+  const criterial = {};
+  if (category) {
+    criterial.category = category;
+  }
+  Product.find(criterial)
+    .sort({ _id: -1 })
+    .limit(limit)
+    .skip(limit * page)
+    .then((products) => res.json(products))
     .catch(next);
 };
 
