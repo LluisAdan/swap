@@ -4,7 +4,9 @@ import './nav-filter.css';
 function NavFilter() {
 
   return (
-    <div className="nav-filter"></div>
+    <>
+      <div className="nav-filter"></div>
+    </>
   )
 }
 

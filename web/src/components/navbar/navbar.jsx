@@ -1,61 +1,72 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../contexts/auth.context';
+import logo from '../../assets/logo/logo.png';
 
 import './navbar.css';
+
+const renderNavLinkActive = ({ isActive }) => isActive ? 'nav-link active' : 'nav-link';
 
 function Navbar() {
   const context = useContext(AuthContext);  
 
   return (
-    <div className="navbar">
-      <div className="container">
-        <div className="logo">
-          <Link to="/home">
-            <h1>Swap</h1>
-          </Link>
-        </div>
+    <div className="navbar d-flex columns justify-content-around">
+      <div className="logo d-flex align-items-center">
+        <Link to="/home" className="div-logo d-flex justify-content-center align-items-center">
+          <img className="img-logo" src={logo} alt="logo" />
+        </Link>
+      </div>
 
-        <div className="btns-user">
+    
+      <div className="search-bar d-flex align-items-center">
+          <input className="form-control bg-search rounded-pill" placeholder="Search" id="searchInput" type="text" />
+      </div>
+
+      <div className="nav-items d-flex justify-content-center">
+        <ul className="nav-ul d-flex justify-content-around align-items-center">
           {!context.user && (
             <>
-              <Link to="/login">
-                <button type="button" className="btn-login btn btn-sm mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                  Login
-                </button>
-              </Link>
-              <Link to="/register">
-                <button type="button" className="btn-register btn btn-sm mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                  Register
-                </button>
-              </Link>
+            <div className="nav-links d-flex justify-content-center align-items-center">
+              <li className="nav-item"><NavLink className={renderNavLinkActive} to="/login">Log in</NavLink></li>
+            </div>
+
+            <div className="nav-links d-flex justify-content-center align-items-center">
+              <li className="nav-item"><NavLink className={renderNavLinkActive} to="/register">Register</NavLink></li>
+            </div> 
+
+            <div className="nav-links d-flex justify-content-center align-items-center">
+              <li className="nav-item add-product"><NavLink className={renderNavLinkActive} to="/login">Add product</NavLink></li> 
+            </div>
             </>
           )}
+
           {context.user && (
-            <div className="d-flex">
-              <div className="mx-3">
-                <button type="button" className="btn-add-product btn btn-sm mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                  Add my product
-                </button>
+            <>
+              <div className="nav-links d-flex justify-content-center align-items-center">
+                <div className="dropdown d-flex align-items-center gap-2 rounded-pill user-navbar" type="button">
+                    <span data-bs-toggle="dropdown">{context.user.username}</span>
+                    <img className="rounded-circle object-fit-cover" data-bs-toggle="dropdown" src={context.user.avatar} alt="Avatar" width="55" height="55"/>
+                
+                    <ul className="dropdown-menu dropdown-menu">
+                      <li>
+                        <Link to="/profile">
+                          <button className="btn-profile dropdown-item">See profile</button>
+                        </Link>
+                      </li>
+                      <li>
+                        <button onClick={context.doLogout} className="dropdown-item">Logout</button>
+                      </li>
+                    </ul>
+                  </div>
               </div>
-              <div className="dropdown d-flex align-items-center gap-2 rounded-pill user-navbar" type="button">
-                <span data-bs-toggle="dropdown">{context.user.username}</span>
-                <img className="rounded-circle object-fit-cover" data-bs-toggle="dropdown" src={context.user.avatar} alt="Avatar" width="55" height="55"/>
-            
-                <ul className="dropdown-menu dropdown-menu">
-                  <li>
-                    <Link to="/profile">
-                      <button className="btn-profile dropdown-item">See profile</button>
-                    </Link>
-                  </li>
-                  <li>
-                    <button onClick={context.doLogout} className="dropdown-item">Logout</button>
-                  </li>
-                </ul>
+                            
+              <div className="nav-links d-flex justify-content-center align-items-center">
+                <li className="nav-item add-product"><NavLink className={renderNavLinkActive} to="/create-product">Add product</NavLink></li> 
               </div>
-            </div>
+            </>
           )}
-        </div>
+        </ul>
       </div>
     </div>
   )

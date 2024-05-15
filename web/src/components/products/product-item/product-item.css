@@ -1,8 +1,38 @@
 
-.product-item {
+.product-item-card {
+  background-color: #dfebea;
+  width: 280px;
+  height: 380px;
+  padding: 10px;
+  border: 1px solid #7cb9b5;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
+}
+
+.img-product-card {
   width: 250px;
+  height: 250px; 
 }
 
 .img-product {
-  width: 250px;
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border: 1px solid #7cb9b5;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
+}
+
+.card-body {
+  height: 100px; 
+}
+
+.product-price {
+  width: 100px;
+  height: 30px;
+}
+
+.product-category {
+  width: 100px;
+  height: 30px;
 }

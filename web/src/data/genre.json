@@ -1,0 +1,18 @@
+[
+  {
+    "option": "Male",
+    "label": "Male"
+  },
+  {
+    "option": "Female",
+    "label": "Female"
+  },
+  {
+    "option": "Other",
+    "label": "Other"
+  },
+  {
+    "option": "I don't want to say it",
+    "label": "I don't want to say it"
+  }
+]

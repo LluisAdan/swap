@@ -7,16 +7,19 @@ const productSchema = new Schema(
   {
     title: {
       type: String,
-      required: 'Title is required'
+      required: 'Title is required',
+      minLength: [2, 'Title needs at least 2 chars'],
+      maxLength: [35, 'Invalid title. Maximum characters: 35']
     },
     description: {
       type: String,
-      required: 'Description is required'
+      required: 'Description is required',
+      minLength: [2, 'Description needs at least 2 chars'],
+      maxLength: [300, 'Invalid title. Maximum characters: 300']
     },
     image: {
-      type: String,
-      required: 'Image is required',
-      default: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+      type: String, 
+      required: 'Image is required'
     },
     category: {
       type: String,
@@ -25,13 +28,8 @@ const productSchema = new Schema(
     },
     price: {
       type: String,
-      enum: Object.keys(prices),
+      enum: prices,
       required: 'Price range required'
-    },
-    preferences: {
-      type: [String],
-      enum: categories,
-      required: 'Preferences are required'
     },
     availability: {
       type: Boolean,
@@ -41,17 +39,17 @@ const productSchema = new Schema(
       type: {
         type: String,
         enum: ['Point'],
-        required: true
+        //required: true
       },
       coordinates: {
         type: [Number],
-        required: true
+        //required: true
       }
     },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "User"
-    }
+    },
   },
   {
     timestamps: true,

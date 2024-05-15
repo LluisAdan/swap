@@ -1,12 +1,53 @@
 
 .form-login {
-  background-color: #d0eae8;
-  border: 2px solid #609b97;
-  border-radius: 50px;
+  width: 350px;
+  height: 350px;
+  background-color: #dfebea;
+  border-radius: 10px;
+  border: 1px solid #7cb9b5;
+  box-shadow: 0 1px 4px #3a5957;
   padding: 30px; 
-  width:20%;
 }
 
-.login {
+.login-top {
   text-align: center;
+}
+
+.login-body {
+  height: 180px;
+
+}
+
+.input-username {
+  height: 50px;
+}
+
+.input-password {
+  height: 50px;
+}
+
+.div-btn-login {
+  width: 330px;
+  height: 60px;
+}
+
+.div-btn-login :hover{
+  transition: 300ms;
+  background-color: #7cb9b5;
+  width: 285px;
+  height: 45px;
+  font-size: 110%;
+}
+
+.div-btn-login :link{
+  transition: 300ms;
+  width: 280px;
+  height: 40px;
+}
+
+.btn-form-login {
+  background-color: #7cb9b5;
+  border-radius: 10px;
+  width: 280px;
+  height: 40px;
 }

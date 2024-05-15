@@ -29,22 +29,22 @@ function Login() {
   
   return (
     <>
-      <div className="form-login rounded-2 my-3 position-absolute top-50 start-50 translate-middle justify-content-center">
-        <div className="login container my-4">
+      <div className="form-login my-3 position-absolute top-50 start-50 translate-middle">
+        <div className="login-top my-4">
             <h1 className="mb-3">Log in</h1>
         </div>
 
-        <div className="mt-3 mb-3">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="form mb-3">
-                    <input type="text" id="username" className={`form-control form-control-lg ${errors.username ? "is-invalid" : ""}`} {...register("username")} placeholder="Username" />
-                </div>
-                <div className="form mb-3">
-                    <input type="password" id="password" className={`form-control form-control-lg ${errors.password ? "is-invalid" : ""}`} {...register("password")} placeholder="Password" />
-                </div>
-                <button type="submit" className="btn btn-primary w-100 upper mt-1">Log in</button>
-            </form>
-        </div>
+        <form className="login-body d-flex row align-items-around" onSubmit={handleSubmit(onSubmit)}>
+            <div className="input-username">
+                <input type="text" id="username" className={`form-control form-control-lg ${errors.username ? "is-invalid" : ""}`} {...register("username")} placeholder="Username" />
+            </div>
+            <div className="input-password">
+                <input type="password" id="password" className={`form-control form-control-lg ${errors.password ? "is-invalid" : ""}`} {...register("password")} placeholder="Password" />
+            </div>
+            <div className="div-btn-login d-flex justify-content-center align-items-center">
+              <button type="submit" className="btn-form-login btn btn-secondary text-uppercase">Log in</button>
+            </div>
+        </form>
       </div>
     </>
   )

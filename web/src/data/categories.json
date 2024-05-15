@@ -1,0 +1,26 @@
+[
+  {
+    "option": "Book, Film and Music",
+    "label": "Book, Film and Music"
+  },
+  {
+    "option": "Home",
+    "label": "Home"
+  },
+  {
+    "option": "Sport",
+    "label": "Sport"
+  },
+  {
+    "option": "Fashion",
+    "label": "Fashion"
+  },
+  {
+    "option": "Electronic",
+    "label": "Electronic"
+  },
+  {
+    "option": "Other",
+    "label": "Other"
+  }
+]

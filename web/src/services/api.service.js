@@ -32,13 +32,12 @@ export function createUser(data) {
 };
 
 export function updateUser(data) {
-  return http.patch('/users', data);
+  return http.patch(`/users/${id}`, data);
 };
 
 export function login(data) {
   return http.post('/login', data).then((response) => {
       localStorage.setItem('token', response.data.accessToken);
-
       return response;
     });
 };
@@ -49,12 +48,20 @@ export function getProfile() {
 
 export function createProduct(data) {
   return http.post('/products', data);
-}
+};
 
 export function getProducts(query) {
   return http.get('/products', { params: query });
 };
 
+export function getProductDetail(id) {
+  return http.get(`/products/${id}`);
+};
+
 export function logout() {
   localStorage.removeItem('token');
+};
+
+export function getRatings() {
+  return http.get('/ratings');
 };

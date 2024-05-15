@@ -7,15 +7,17 @@ import Navbar from './components/navbar/navbar';
 import ProductsList from './components/products/products-list/products-list';
 import EditProfile from './pages/edit-profile/edit-profile';
 import { AlertProvider } from './contexts/alert-context/alert.context';
-import NavFilter from './components/nav-filter/nav-filter';
 import Profile from './pages/profile/profile';
+import CreateProduct from './pages/create-product/create-product';
+import ProductDetail from './pages/product-detail/product-detail';
+
+import './app.css';
 
 function App() {
   return (
     <>
       <Navbar />
-      <NavFilter />
-      <div className="container">
+      <div className="container content">
         <AlertProvider>
           <Routes>
             <Route path="/home" element={<Home/>} />
@@ -24,12 +26,13 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/users/:id" element={<EditProfile />} />
             <Route path="/products" element={<ProductsList />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/create-product" element={<CreateProduct />} />
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         </AlertProvider>
       </div>
     </>
-
   )
 }
 

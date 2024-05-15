@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Rating = require('../models/rating.model');
+const User = require('../models/user.model');
 
 module.exports.create = (req, res, next) => {
   Rating.create({
     rating: req.body.rating,
-    title: req.body.title,
     text: req.body.text,
     owner: req.user.id,
     target: req.params.userId
@@ -19,6 +19,14 @@ module.exports.create = (req, res, next) => {
       next(err);
     }
   });
+};
+
+module.exports.list = (req, res, next) => {
+  Rating.find()
+  .then((ratings) => {
+    res.json(ratings);
+  })
+  .catch(next);
 };
 
 module.exports.delete = (req, res, next) => {

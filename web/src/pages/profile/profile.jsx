@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../contexts/auth.context';
 import { Link } from 'react-router-dom';
+import ProductsList from '../../components/products/products-list/products-list';
 
 import './profile.css';
-
 
 function Profile() {
   const context = useContext(AuthContext);
@@ -29,14 +29,25 @@ function Profile() {
               <i className="fa fa-star-o"></i>
               <i className="fa fa-star-o"></i>
               <i className="fa fa-star-o"></i>
-              AVERAGE RATING
+              4.3 (15)
             </div>
           </div>
-          <Link to="/edit-profile">
-            <button className="btn btn-secondary edit-profile">Edit profile</button>
-          </Link>
+          <div>
+            <div>
+              <Link to="/create-product">
+                <button className="btn btn-secondary btn-profile">Add product</button>
+              </Link>
+            </div>
+            <div>
+              <Link to={`/users/${context.user.id}`}>
+                <button className="btn btn-secondary btn-profile">Edit profile</button>
+              </Link>
+            </div>
+          </div>
         </div>
         <hr />
+
+        <ProductsList limit={4} page={0} />
       </>
     )}
     </>

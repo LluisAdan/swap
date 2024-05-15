@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const ratingsSchema = new Schema(
+const ratingSchema = new Schema(
     {
         rating: {
           type: Number,
@@ -9,11 +9,10 @@ const ratingsSchema = new Schema(
           min: 0,
           max: 5
         },
-        title: {
+        text: {
           type: String,
-          required: [true, 'Rating title is required']
+          required: [true, 'Rating text is required']
         },
-        text: String,
         owner: {
           type: Schema.Types.ObjectId,
           ref: "User"
@@ -36,5 +35,5 @@ const ratingsSchema = new Schema(
       }
 );
 
-const Ratings = mongoose.model('Rating', ratingsSchema);
-module.exports = Ratings;
+const Rating = mongoose.model('Rating', ratingSchema);
+module.exports = Rating;

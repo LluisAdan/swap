@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../services/api.service';
 import { useAlert } from '../../contexts/alert-context/alert.context';
+import genreData from '../../data/genre.json';
+
+import './register.css';
 
 function Register() {
   const navigate = useNavigate();
@@ -15,6 +18,7 @@ function Register() {
   } = useForm();
 
   async function onSubmit(data) {
+    console.log(data);
     try {
       await createUser(data);
       navigate('/login');
@@ -24,69 +28,99 @@ function Register() {
   };
   
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name *
-          </label>
-          <input required type="text" id="name" className={`form-control ${errors.name ? "is-invalid" : ""}`} {...register('name')} />
-        </div>
+    <form className="register d-flex justify-content-center align-items-center" onSubmit={handleSubmit(onSubmit)}>
+      <div className="d-flex justify-content-center align-items-center">
+        <div className="row row-cols-2 w-100 h-100">
 
-        <div className="mb-3">
-          <label htmlFor="lastName" className="form-label">
-            Last Name *
-          </label>
-          <input required type="text" id="lastName" className={`form-control ${errors.lastName ? "is-invalid" : ""}`} {...register('lastName')} />
-        </div>
+          <div className="col d-flex align-items-center">
+            <div className="w-100 form-floating mb-2">
+              <input type="text" className={`form-control ${errors.name ? 'is-invalid' : ''}`} {...register("name", { required: 'Name is required'})} />
+              <label>Name *</label>
+              {errors.name && (<div className='invalid-feedback'>{errors.name.message}</div>)}
+            </div>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">
-            Username *
-          </label>
-          <input required type="text" id="username" className={`form-control ${errors.username ? "is-invalid" : ""}`} {...register('username')} />
-        </div>
+          <div className="col d-flex align-items-center">
+            <div className="w-100 form-floating mb-2">
+              <input type="text" className={`form-control ${errors.lastName ? 'is-invalid' : ''}`} {...register("lastName", { required: 'Last Name is required' })} />
+              <label>Last Name *</label>
+              {errors.lastName && (<div className='invalid-feedback'>{errors.lastName.message}</div>)}
+            </div>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email address *
-          </label>
-          <input required type="email" id="email" className={`form-control ${errors.email ? "is-invalid" : ""}`} {...register('email')} />
-        </div>
+          <div className="col d-flex align-items-center">
+            <div className="w-100 form-floating mb-2">
+              <input type="text" className={`form-control ${errors.username ? 'is-invalid' : ''}`} {...register("username", { required: 'Username is required' })} />
+              <label>Username *</label>
+              {errors.username && (<div className='invalid-feedback'>{errors.username.message}</div>)}
+            </div>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password *
-          </label>
-          <input required  type="password" id="password" className={`form-control ${errors.password ? "is-invalid" : ""}`} {...register('password')} />
-        </div>
+          <div className="col d-flex align-items-center">
+            <div className="register-avatar form-floating mb-2">
+              <input type="file" className={`form-control ${errors.avatar ? 'is-invalid' : ''}`} {...register("avatar")} />
+              <label>Avatar</label>
+              {errors.avatar && (<div className='invalid-feedback'>{errors.avatar.message}</div>)}
+            </div>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="avatar" className="form-label">
-            Avatar
-          </label>
-          <input type="text" id="avatar" className={`form-control ${errors.avatar ? "is-invalid" : ""}`} {...register('avatar')} />
-        </div>
-        
-        <div className="mb-3">
-          <label htmlFor="birthDate" className="form-label">
-            Birth date *
-          </label>
-          <input required type="date" id="birthDate" className={`form-control ${errors.birthDate ? "is-invalid" : ""}`} {...register('birthDate')} />
-        </div>
+          <div className="col d-flex align-items-center">
+            <div className="w-100 form-floating mb-2">
+              <input type="email" className={`form-control ${errors.email ? 'is-invalid' : ''}`} {...register("email", { required: 'Email is required' })} />
+              <label>Email *</label>
+              {errors.email && (<div className='invalid-feedback'>{errors.email.message}</div>)}
+            </div>
+          </div>
+          
+          <div className="col d-flex justify-content-start align-items-center">
+            <div className="w-100 form-floating mb-2">
+              <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} {...register("password", { required: 'Password is required' })} />
+              <label>Password *</label>
+              {errors.password && (<div className='invalid-feedback'>{errors.password.message}</div>)}
+            </div>
+          </div>
 
-        <div className="mb-3">
-          <label htmlFor="phone" className="form-label">
-            Phone
-          </label>
-          <input type="text" id="phone" className={`form-control ${errors.phone ? "is-invalid" : ""}`} {...register('phone')} />
+          <div className="col d-flex justify-content-center align-items-center">
+
+            <div className="register-birth-date form-floating mb-2">
+              <input type="date" className={`form-control ${errors.birthDate ? 'is-invalid' : ''}`} {...register("birthDate", { required: 'Birth date is required' })} />
+              <label>Birth date *</label>
+              {errors.birthDate && (<div className='invalid-feedback'>{errors.birthDate.message}</div>)}
+            </div>
+
+            <div className="register-phone form-floating mb-2">
+              <input type="text" className={`form-control ${errors.phone ? 'is-invalid' : ''}`} {...register("phone")} />
+              <label>Phone</label>
+              {errors.phone && (<div className='invalid-feedback'>{errors.phone.message}</div>)}
+            </div>
+
+            <div className="register-genre form-floating mb-2">
+              <select className={`form-select ${errors.genre ? 'is-invalid' : ''}`}
+                {...register("genre", {
+                  required: "Genre is required"
+                })}>
+                {genreData.map((genre) => (<option key={genre.option} value={genre.option}>{genre.label}</option>))}
+              </select>
+              <label>Genre</label>
+              {errors.genre && <div className='invalid-feedback'>{errors.genre.message}</div>}
+            </div>
+
+          </div>
+
+          <div className="col d-flex justify-content-around align-items-center">
+
+            <div className="text-required d-flex justify-content-center align-items-center">
+              <span className="register-required d-flex justify-content-center align-items-center">* required fields</span>
+            </div>
+
+            <div className="btn-create-register d-flex justify-content-center align-items-center">
+              <button type="submit" className='submit-form-create btn btn-secondary text-uppercase'>Register</button>
+            </div>
+
+          </div>
         </div>
-
-        <p>* required fields</p>
-
-        <button type="submit" className="btn btn-success">Register</button>
-      </form>
-    </>
+      </div>
+    </form>
   )
 }
 

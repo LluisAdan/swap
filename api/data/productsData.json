@@ -4,77 +4,77 @@
     "description": "Macbook pro 14 inches with m3 pro chip in perfect condition. It has been used very little.",
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715546111/Swap/products/macbookPro_tncrqk.jpg",
     "category": "Electronic",
-    "price": "Very high",
-    "preferences": ["Electronic"],
+    "price": "1001-3000",
     "availability": true,
     "location": {
       "type": "Point",
       "coordinates": [2.15899, 41.38879]
-    }
+    },
+    "owner":"6643bf3c9f5b45113f36c2f0"
   },
   {
     "title": "The Limits of the Foundation, Isaac Asimov",
     "description": "Book The Limits of the Foundation by Isaac Asimov. It has some scratches but the pages are perfect.",
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715546594/Swap/products/asimov_hj2bw7.jpg",
     "category": "Book, Film and Music",
-    "price": "Very low",
-    "preferences": ["Fashion", "Home", "Book, Film and Music"],
+    "price": "1-50",
     "availability": true,
     "location": {
       "type": "Point",
       "coordinates": [1.15899, 46.38879]
-    }
+    },
+    "owner":"6643bf5410e632dd2be63e42"
   },
   {
     "title": "Dressing table made of mahogany",
     "description": "Height 2.12m x Width 1.28m x Depth 49cm",
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715547091/Swap/products/tocador_rg29cy.jpg",
     "category": "Home",
-    "price": "High",
-    "preferences": ["Electronic", "Home"],
+    "price": "501-1000",
     "availability": true,
     "location": {
       "type": "Point",
       "coordinates": [3.15899, 48.38879]
-    }
+    },
+    "owner":"6643bf8bdcb7bd1cd9d259cd"
   },
   {
     "title": "Adidas Forum Low Bad Bunny Back to School",
     "description": "Adidas Forum Low Bad Bunny Back to School in perfect condition. Size: 43EU/9.5US",
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715593050/Swap/products/adidas_utzpjc.jpg",
     "category": "Fashion",
-    "price": "Low",
-    "preferences": ["Fashion", "Electronic"],
+    "price": "51-200",
     "availability": true,
     "location": {
       "type": "Point",
       "coordinates": [3.45899, 48.18879]
-    }
+    },
+    "owner": "6643bfa35b985fa0a23f3c9a"
   },
   {
     "title": "XCELERATE BASKET",
     "description": "XCELERATE BASKET RUBBER PREMIUM 29.5' SIZE OFICIAL",
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715593404/Swap/products/basket_nwtl7s.jpg",
     "category": "Sport",
-    "price": "Very low",
-    "preferences": ["Sport", "Fashion"],
+    "price": "1-50",
     "availability": true,
     "location": {
       "type": "Point",
       "coordinates": [3.45899, 48.18879]
-    }
+    },
+    "owner":"6643bfbdac2b41401dc78776"
   },
   {
     "title": "Nintendo Switch",
     "description": "Switch V1 console with renewed joycon with hardly any use. Cleaned weekly mind and without any kind of blow, well maintained. Option to buy with game (NEO TWEWY) or Gamecube controller for the Switch.",
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715593783/Swap/products/switch_y68glm.jpg",
     "category": "Electronic",
-    "price": "Normal",
-    "preferences": ["Electronic", "Home"],
+    "price": "201-500",
     "availability": true,
     "location": {
       "type": "Point",
       "coordinates": [2.65899, 44.14879]
-    }
+    },
+    "owner":"6643bf3c9f5b45113f36c2f0"
   }
 ]

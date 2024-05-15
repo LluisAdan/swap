@@ -8,17 +8,25 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: 'Name is required'
+      required: 'Name is required',
+      minLength: [2, 'Name needs at least 2 chars'],
+      maxLength: [16, 'Invalid name. Maximum characters: 16'],
+      trim: true
     },  
     lastName: {
       type: String,
-      required: 'Last name is required'
+      required: 'Last name is required',
+      minLength: [2, 'Last name needs at least 2 chars'],
+      maxLength: [16, 'Invalid last name. Maximum characters: 16'],
+      trim: true
     },
     username: {
       type: String,
       required: 'Username is required',
       minLength: [2, 'Username needs at least 2 chars'],
-      unique: true
+      maxLength: [16, 'Invalid username. Maximum characters: 16'],
+      unique: true,
+      trim: true
     },
     avatar: {
       type: String,
@@ -27,30 +35,35 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: 'Email is required',
-      unique: true
+      unique: true,
+      lowercase: true,
+      trim: true
     },
     password: {
       type: String,
       required: 'Password is required',
-      minLength: [8, 'Password needs at least 8 chars']
+      minLength: [8, 'Password needs at least 8 chars'],
+      maxLength: [16, 'Invalid password. Maximum characters: 16']
     },
-    address: String,
     birthDate: {
       type: Date,
       required: 'Birth date is required'
     },
-    phone: String,
+    phone: {
+      type: String,
+      maxLength: [16, 'Invalid phone. Maximum characters: 16']
+    },
     genre: {
       type: String,
       enum: genre
     },
-    preferences: {
-      type: String,
-      enum: categories
+    history: {
+      type: Schema.Types.ObjectId,
+      ref: "Product"
     },
-    history: [Object],
     favoriteProducts: {
-      type: [Object]
+      type: Schema.Types.ObjectId,
+      ref: "Product"
     }
   },
   {
@@ -75,9 +88,9 @@ userSchema.virtual('products', {
 });
 
 userSchema.virtual('ratings', {
-  ref: 'UserRating',
+  ref: 'Rating',
   localField: '_id',
-  foreignField: 'user',
+  foreignField: 'target',
 });
 
 userSchema.pre('save', function(next) {
