@@ -31,7 +31,7 @@ export function createUser(data) {
   return http.post('/users', data);
 };
 
-export function updateUser(data) {
+export function updateUser(id, data) {
   return http.patch(`/users/${id}`, data);
 };
 
@@ -62,6 +62,10 @@ export function logout() {
   localStorage.removeItem('token');
 };
 
-export function getRatings() {
-  return http.get('/ratings');
+export function getRatings(userId) {
+  return http.get(`/user/${userId}/ratings`);
+};
+
+export function checkIfFavourite() {
+
 };

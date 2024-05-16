@@ -47,7 +47,10 @@ module.exports.detail = (req, res, next) => {
     .populate({
       path: "owner",
       populate: {
-        path: "ratings"
+        path: "ratings",
+        populate: {
+          path: "owner"
+        }
       }
     })
     .then((product) => {

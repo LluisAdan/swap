@@ -9,7 +9,7 @@ const productSchema = new Schema(
       type: String,
       required: 'Title is required',
       minLength: [2, 'Title needs at least 2 chars'],
-      maxLength: [35, 'Invalid title. Maximum characters: 35']
+      maxLength: [50, 'Invalid title. Maximum characters: 50']
     },
     description: {
       type: String,

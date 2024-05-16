@@ -7,7 +7,7 @@ import AuthContext from '../../../contexts/auth.context';
 
 import './product-list.css';
 
-function ProductsList({ category, limit, page }) {
+function ProductsList({ category, limit, page,  lat, lng }) {
   const [products, setProducts] = useState(null);
   const { showAlert } = useAlert();
   const location = useLocation();
@@ -20,6 +20,10 @@ function ProductsList({ category, limit, page }) {
         if (category) query.category = category;
         if (limit) query.limit = limit;
         if (page) query.page = page;
+        if (lat && lng) {
+          query.lat = lat;
+          query.lng = lng;
+        }
         
         const response = await getProducts(query);
         setProducts(response.data);
@@ -28,7 +32,7 @@ function ProductsList({ category, limit, page }) {
       }
     }
     fetch();
-  }, [category, limit]);
+  }, [category, limit, lat, lng]);
 
   if (!products) {
     return <div>Loading...</div>

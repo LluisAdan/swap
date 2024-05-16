@@ -23,6 +23,6 @@ router.get('/profile', auth.checkAuth, users.profile);
 
 // Rating's routes
 router.post('/ratings', auth.checkAuth, ratings.create);
-router.get('/ratings', ratings.list);
+router.get('/users/:userId/ratings', ratings.list);
 
 module.exports = router;

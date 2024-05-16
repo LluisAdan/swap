@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [updateUser, setUpdateUser] = useState(null);
   const navigate = useNavigate();
 
   async function fetchProfile() {
@@ -32,6 +33,7 @@ export function AuthContextProvider({ children }) {
 
   const value = {
     user,
+    updateUser,
     doLogin,
     doLogout
   }

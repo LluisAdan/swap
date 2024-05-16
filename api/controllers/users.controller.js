@@ -10,7 +10,7 @@ module.exports.create = (req, res, next) => {
       } else {
 
         if (req.file) {
-          req.avatar = req.file.path;
+          req.body.avatar = req.file.path;
         };
         
         return User.create({
@@ -21,7 +21,7 @@ module.exports.create = (req, res, next) => {
           avatar: req.body.avatar,
           password: req.body.password,
           birthDate: req.body.birthDate,
-          genre: req.body.genre,
+          genre: req.body.genre        
         })
           .then((user) => {
             res.status(201).json(user);
@@ -59,8 +59,7 @@ module.exports.update = (req, res, next) => {
     password: req.body.password,
     address: req.body.address,
     birthDate: req.body.birthDate,
-    genre: req.body.genre,
-    preferences: req.body.preferences
+    genre: req.body.genre
   };
 
   if (req.file) {

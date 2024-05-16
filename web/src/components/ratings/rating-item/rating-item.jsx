@@ -7,7 +7,7 @@ function RatingItem ({ rating }) {
     <>
       <div>
         <div>
-          <h4>{rating.owner}</h4>
+          <h4>{rating.owner.username}</h4>
           <p>{rating.createAt}</p>
         </div>
         <div>

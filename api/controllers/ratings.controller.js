@@ -22,7 +22,10 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.list = (req, res, next) => {
-  Rating.find()
+  const { userId } = req.params;
+
+  Rating.find({ target: userId })
+  .populate("owner")
   .then((ratings) => {
     res.json(ratings);
   })
