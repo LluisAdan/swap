@@ -27,30 +27,30 @@
     "rating": 1,
     "text": "The shoes are not the size I indicated. I do not recommend exchanging with this user.",
     "owner": "6643bfbdac2b41401dc78776",
-    "target": "6643bf3c9f5b45113f36c2f0"
+    "target": "6647665a0be8b9a42dc29f23"
   },
   {
     "rating": 5,
     "text": "All perfect.",
     "owner": "6643bfa35b985fa0a23f3c9a",
-    "target": "6643bf3c9f5b45113f36c2f0"
+    "target": "6647665a0be8b9a42dc29f23"
   },
   {
     "rating": 4,
     "text": "Perfect.",
     "owner": "6643bf8bdcb7bd1cd9d259cd",
-    "target": "6643bf3c9f5b45113f36c2f0"
+    "target": "6647665a0be8b9a42dc29f23"
   },
   {
     "rating": 3,
     "text": "Product in good condition, but arrived late.",
-    "owner": "6643bf5410e632dd2be63e42",
-    "target": "6643bf3c9f5b45113f36c2f0"
+    "owner": "6643bfa35b985fa0a23f3c9a",
+    "target": "6647665a0be8b9a42dc29f23"
   },
   {
     "rating": 2,
     "text": "Book in bad condition.",
-    "owner": "6643bf3c9f5b45113f36c2f0",
-    "target": "6643bf3c9f5b45113f36c2f0"
+    "owner": "6643bf8bdcb7bd1cd9d259cd",
+    "target": "6647665a0be8b9a42dc29f23"
   }
 ]

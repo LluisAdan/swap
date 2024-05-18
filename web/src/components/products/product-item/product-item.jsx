@@ -22,7 +22,7 @@ function ProductItem({ product }) {
 
           <div className="product-info d-flex justify-content-around align-items-center">
             <div className="product-price d-flex justify-content-center align-items-center">
-              <p className="fa fa-euro"> {product.price}</p>
+              <p>{product.price}</p>
             </div>
             <div className="product-category d-flex justify-content-center align-items-center">
               <p>{product.category}</p>

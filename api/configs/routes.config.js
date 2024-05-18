@@ -16,7 +16,7 @@ router.delete('/products/:id', auth.checkAuth, auth.isOwnerProduct, products.del
 // User's routes
 router.post('/users', storage.single('avatar'), users.create);
 router.get('/users/:id', auth.checkAuth, users.detail);
-router.patch('/users/:id', auth.checkAuth, auth.isOwnerProfile, users.update);
+router.patch('/users/:id', auth.checkAuth, auth.isOwnerProfile, storage.single('avatar'), users.update);
 router.delete('/users/:id', auth.checkAuth, auth.isOwnerProfile, users.delete);
 router.post('/login', users.login);
 router.get('/profile', auth.checkAuth, users.profile);

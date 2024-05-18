@@ -11,7 +11,8 @@ const ratingSchema = new Schema(
         },
         text: {
           type: String,
-          required: [true, 'Rating text is required']
+          required: [true, 'Rating text is required'],
+          maxLength: [200, 'Invalid rating. Maximum characters: 200']
         },
         owner: {
           type: Schema.Types.ObjectId,

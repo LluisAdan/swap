@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import AuthContext from '../../../contexts/auth.context';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { updateUser } from '../../../services/api.service';
 import { useForm } from 'react-hook-form';
 import genreData from '../../../data/genre.json';
@@ -10,6 +10,7 @@ import './update-user-form.css';
 function UpdateUserForm() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const { id } = useParams();
   
   const { 
     register, 
@@ -30,7 +31,7 @@ function UpdateUserForm() {
     data.append("genre", user.genre);
 
     try {
-      const res = await updateUser(user.id, data);
+      const res = await updateUser(id, data);
       navigate('/profile');
     } catch (error) {
       console.error(error);

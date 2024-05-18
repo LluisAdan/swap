@@ -35,8 +35,4 @@ function AutocompleteInput({ onPlaceChange }) {
   )
 }
 
-AutocompleteInput.defaultProps = {
-  onPlaceChange: (location) => console.debug(location)
-};
-
 export default AutocompleteInput;

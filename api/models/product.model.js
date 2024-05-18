@@ -9,13 +9,13 @@ const productSchema = new Schema(
       type: String,
       required: 'Title is required',
       minLength: [2, 'Title needs at least 2 chars'],
-      maxLength: [50, 'Invalid title. Maximum characters: 50']
+      maxLength: [38, 'Invalid title. Maximum characters: 38']
     },
     description: {
       type: String,
       required: 'Description is required',
       minLength: [2, 'Description needs at least 2 chars'],
-      maxLength: [300, 'Invalid title. Maximum characters: 300']
+      maxLength: [200, 'Invalid title. Maximum characters: 200']
     },
     image: {
       type: String, 
@@ -39,11 +39,11 @@ const productSchema = new Schema(
       type: {
         type: String,
         enum: ['Point'],
-        //required: true
+        required: true
       },
       coordinates: {
         type: [Number],
-        //required: true
+        required: true
       }
     },
     owner: {

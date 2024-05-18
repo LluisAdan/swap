@@ -57,14 +57,14 @@ const userSchema = new Schema(
       type: String,
       enum: genre
     },
-    history: {
+    history: [{
       type: Schema.Types.ObjectId,
       ref: "Product"
-    },
-    favoriteProducts: {
+    }],
+    favoriteProducts: [{
       type: Schema.Types.ObjectId,
       ref: "Product"
-    }
+    }]
   },
   {
     timestamps: true,

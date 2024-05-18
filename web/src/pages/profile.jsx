@@ -1,11 +1,11 @@
 import React from 'react';
-import ProfileUser from '../components/users/profile-user/profile-user';
 import PageLayout from '../components/layouts/page-layout';
+import ProductsList from '../components/products/products-list/products-list';
 
 function Profile() {
   return (
-    <PageLayout>
-      <ProfileUser />
+    <PageLayout withUser={true}>
+      <ProductsList limit={4} page={0} />
     </PageLayout>
   )
 }

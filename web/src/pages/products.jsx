@@ -2,6 +2,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PageLayout from '../components/layouts/page-layout';
 import ProductsList from '../components/products/products-list/products-list';
+import Map from '../components/google/map/map';
 
 function Products() {
   const [searchParams, setSearchParams] = useSearchParams();

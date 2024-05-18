@@ -3,9 +3,7 @@ const Product = require('../models/product.model');
 
 module.exports.create = (req, res, next) => {
 
-  if (req.file) {
-    req.body.image = req.file.path;
-  }
+  if (req.file) req.body.image = req.file.path;
   
   Product.create({
       title: req.body.title,
@@ -16,9 +14,7 @@ module.exports.create = (req, res, next) => {
       location: req.body.location, // geojson
       owner: req.user.id
     })
-    .then((product) => {
-      res.status(201).json(product);
-    })
+    .then((product) => res.status(201).json(product))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         res.status(400).json(err.errors);
@@ -29,11 +25,22 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.list = (req, res, next) => {
-  const { category, limit = process.env.DEFAULT_LIMIT, page = 0 } = req.query;
+  const { category, lat, lng, limit = process.env.DEFAULT_LIMIT, page = 0 } = req.query;
   const criterial = {};
-  if (category) {
-    criterial.category = category;
-  }
+  if (category) criterial.category = category;
+  if (lat && lng) {
+    criterial.location = {
+      $near: {
+        $geometry: {
+          type: "Point",
+          coordinates: [lng, lat]
+        },
+        $maxDistance: 100000,
+        $minDistance: 0
+      }
+    };
+  };
+
   Product.find(criterial)
     .sort({ _id: -1 })
     .limit(limit)
@@ -43,7 +50,22 @@ module.exports.list = (req, res, next) => {
 };
 
 module.exports.detail = (req, res, next) => {
-  Product.findById(req.params.id)
+  const { lat, lng } = req.query;
+  const criterial = {};
+  if (lat && lng) {
+    criterial.location = {
+      $near: {
+        $geometry: {
+          type: "Point",
+          coordinates: [lng, lat]
+        },
+        $maxDistance: 100000,
+        $minDistance: 0
+      }
+  }
+};
+
+  Product.findById(req.params.id, criterial)
     .populate({
       path: "owner",
       populate: {
@@ -53,13 +75,7 @@ module.exports.detail = (req, res, next) => {
         }
       }
     })
-    .then((product) => {
-      if (product) {
-        res.json(product);
-      } else {
-        res.status(404).json({ message: "Product not found"});
-      }
-    })
+    .then((product) => (product) ? res.json(product) : res.status(404).json({ message: "Product not found"}))
     .catch(next);
 };
 
@@ -68,13 +84,7 @@ module.exports.update = (req, res, next) => {
     runValidators: true,
     new: true
   })
-    .then((product) => {
-      if (product) {
-        res.json(product);
-      } else {
-        res.status(404).json({ message: "Product not found"});
-      }
-    })
+    .then((product) => (product) ? res.json(product) : res.status(404).json({ message: "Product not found"}))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         res.status(400).json(err.errors);
@@ -86,12 +96,6 @@ module.exports.update = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
   Product.findByIdAndDelete(req.params.id)
-    .then((product) => {
-      if (product) {
-        res.status(204).send();
-      } else {
-        res.status(404).json({ message: "Product not found"});
-      }
-    })
+    .then((product) => (product) ? res.status(204).send() : res.status(404).json({ message: "Product not found"}))
     .catch(next);
 };

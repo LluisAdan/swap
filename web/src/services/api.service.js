@@ -54,8 +54,8 @@ export function getProducts(query) {
   return http.get('/products', { params: query });
 };
 
-export function getProductDetail(id) {
-  return http.get(`/products/${id}`);
+export function getProductDetail(id, query) {
+  return http.get(`/products/${id}`, { params: query });
 };
 
 export function logout() {

@@ -1,6 +1,6 @@
 import React from 'react'
 import PageLayout from '../components/layouts/page-layout';
-import ProductForm from '../components/products/product-create-form/product-form';
+import ProductForm from '../components/products/create-product-form/create-product-form';
 
 function CreateProduct() {
   return (

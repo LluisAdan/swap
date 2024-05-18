@@ -2,25 +2,32 @@ import React, { useEffect, useState, useContext } from 'react';
 import { getProductDetail } from '../../../services/api.service';
 import AuthContext from '../../../contexts/auth.context';
 import { useParams, useNavigate } from 'react-router-dom';
-import RatingList from '../../../components/ratings/rating-list/rating-list';
+import RatingList from '../../ratings/rating-list/rating-list';
+import Map from '../../google/map/map';
 
-import './product-detail.css';
+import './detail-product.css';
 
-function ProductDetail() {
+function ProductDetail({ lat, lng }) {
   const [product, setProduct] = useState(null);
-  const { user, updateUser } = useContext(AuthContext);  
-  const { id } = useParams()
+  const { user } = useContext(AuthContext);  
+  const { id } = useParams();
   const navigate = useNavigate();
   const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
     async function fetch() {
       try {
-        const {data } = await getProductDetail(id);
+        const query = {};
+        if (lat && lng) {
+          query.lat = lat;
+          query.lng = lng;
+        }
+
+        const { data } = await getProductDetail(id, query);
         setProduct(data);
-        console.log(data);
-        console.log(user);
-        {/*
+        
+        console.log(user)
+
         if (user) {
           console.log(user)
           if (user.favouriteProducts) {
@@ -28,7 +35,7 @@ function ProductDetail() {
             console.log(setIsFavorited);
           }
         }
-        */}
+
       } catch (error) {
         if (error.response?.status == 404) {
           navigate('/');
@@ -36,7 +43,7 @@ function ProductDetail() {
       }
     }
     fetch();
-  }, [id]);
+  }, [id, lat, lng]);
 
   const toggleFavorite = () => {
     const updatedFavorites = isFavorited ? user.favouriteProducts.filter(productId => productId !== id) : [...user.favouriteProducts, id];
@@ -52,21 +59,29 @@ function ProductDetail() {
   return (
     <>
       <div className="detail-card d-flex row justify-content-center">
-        <div className="info-top-detail d-flex justify-content-between">
-          <div className="info-user-detail d-flex row align-items-center">
-            <h5>{product.owner.name} {product.owner.lastName}</h5>
-            <p>Rating</p>
+        <div className="info-top-detail d-flex justify-content-between align-items-center">
+          <div className="d-flex align-items-center">
+            <div className="mx-2">
+              <img className="rounded-circle object-fit-cover" src={product.owner.avatar} alt={product.owner.avatar} width="60" height="60"/>
+            </div>
+            <div className="d-flex row">
+              <h5>{product.owner.name} {product.owner.lastName}</h5>
+              <p>Rating</p>
+            </div>
           </div>
           <div className="btns-detail d-flex justify-content-around align-items-center">
-            <i type="button" className="fa fa-heart-o fa-lg icon-heart" onClick={toggleFavorite}
-              style={{ color: isFavorited ? 'red' : 'black' }}></i>
-            <button type="button" className="btn btn-chat btn-sm link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-              Chat
-            </button>
+            <div>
+              <i type="button" className="fa fa-heart-o fa-lg icon-heart" onClick={toggleFavorite}
+                style={{ color: isFavorited ? 'red' : 'black' }}></i>
+            </div>
+
+              <div className="div-btn-match d-flex justify-content-center align-items-center">
+                <button type="button" className="btn-match">Match</button>
+              </div>
           </div>
         </div>
 
-        <div className="img-detail d-flex justify-content-center align-items-center">
+        <div className="d-flex justify-content-center align-items-center">
           <img className="img-product-detail" src={product.image} alt={product.title} />
         </div>
 
@@ -76,23 +91,22 @@ function ProductDetail() {
           </div>
 
           <div className="product-price-detail">
-            <p className="fa fa-usd"> {product.price}</p>
+            <p>{product.price}</p>
           </div>
           <hr />
           <div className="product-desc-detail">
             <p>{product.description}</p>
           </div>
+          <hr />
         </div>
 
-        <div className="location-product-detail">
-          LOCATION
+        <div className="map-product d-flex justify-content-center m-20">
+          <Map center={{lat: parseFloat(product.location.coordinates[1]), lng: parseFloat(product.location.coordinates[0])}} />
         </div>
 
         <div className="rating-product-detail">
-          RATINGS
           <RatingList ratings={product.owner.ratings}/>
         </div>
-
       </div>
     </>
   )

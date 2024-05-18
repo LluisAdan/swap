@@ -12,8 +12,8 @@ function RegisterForm() {
   const { 
     register, 
     handleSubmit, 
-    formState: { errors, isValid }
-  } = useForm({ mode: 'all' });
+    formState: { errors }
+  } = useForm();
 
   const handleUserSubmit = async (user) => {
     const data = new FormData();

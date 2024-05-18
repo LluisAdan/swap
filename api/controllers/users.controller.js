@@ -9,9 +9,7 @@ module.exports.create = (req, res, next) => {
         res.status(409).json({message: "Username already exists"});
       } else {
 
-        if (req.file) {
-          req.body.avatar = req.file.path;
-        };
+        if (req.file) req.body.avatar = req.file.path;
         
         return User.create({
           name: req.body.name,
@@ -23,9 +21,7 @@ module.exports.create = (req, res, next) => {
           birthDate: req.body.birthDate,
           genre: req.body.genre        
         })
-          .then((user) => {
-            res.status(201).json(user);
-          })
+          .then((user) => res.status(201).json(user))
           .catch((err) => {
             if (err instanceof mongoose.Error.ValidationError) {
               res.status(400).json(err.errors);
@@ -40,13 +36,7 @@ module.exports.create = (req, res, next) => {
 module.exports.detail = (req, res, next) => {
   User.findById(req.params.id)
   .populate('products')
-  .then((user) => {
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404).json({ message: "User not found"});
-    };
-  })
+  .then((user) => (user) ? res.json(user) : res.status(404).json({ message: "User not found"}))
   .catch(next);
 };
 
@@ -56,19 +46,13 @@ module.exports.update = (req, res, next) => {
     lastName: req.body.lastName,
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
-    address: req.body.address,
     birthDate: req.body.birthDate,
     genre: req.body.genre
   };
 
-  if (req.file) {
-    patch.avatar = req.file.path;
-  }
+  if (req.file) patch.avatar = req.file.path;
 
-  if (req.body.password) {
-    patch.password = req.body.password;
-  }
+  if (req.body.password) patch.password = req.body.password;
 
   User.findById(req.params.id)
     .then((user) => {
@@ -91,13 +75,7 @@ module.exports.update = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
   User.findByIdAndDelete(req.params.id)
-    .then((user) => {
-      if (user) {
-        res.status(204).send();
-      } else {
-        res.status(404).json({ message: "User not found"});
-      };
-    })
+    .then((user) => (user) ? res.status(204).send() : res.status(404).json({ message: "User not found"}))
     .catch(next);
 };
 
