@@ -32,7 +32,7 @@ function UpdateUserForm() {
 
     try {
       const res = await updateUser(id, data);
-      navigate('/profile');
+      navigate('/');
     } catch (error) {
       console.error(error);
     }

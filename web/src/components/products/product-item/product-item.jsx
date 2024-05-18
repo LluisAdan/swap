@@ -1,14 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import './product-item.css';
+import "./product-item.css";
 
-function ProductItem({ product }) {
+function ProductItem({ product, isRequest, selected, onSelected }) {
+  
+  if (isRequest) {
+    return (
+      <div
+        onClick={() => {
+          onSelected(product.id);
+        }}
+        className={`request-item-card d-flex justify-content-start align-items-center ${
+          selected ? "request-item-card-selected" : ""
+        }`}
+      >
+        <div className="d-flex justify-content-center">
+          <img
+            src={product.image}
+            className="img-request-product"
+            alt={product.title}
+          />
+        </div>
+
+        <div className="mx-2 d-flex justify-content-start">
+          <h5>{product.title}</h5>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Link className="link-card" to={`/products/${product.id}`}>
       <div className="product-item-card d-flex row justify-content-center align-items-center">
         <div className="img-product-card d-flex justify-content-center">
-          <img src={product.image} className="img-product" alt={product.title} />
+          <img
+            src={product.image}
+            className="img-product"
+            alt={product.title}
+          />
         </div>
 
         <div className="card-body d-flex row">
@@ -31,7 +61,7 @@ function ProductItem({ product }) {
         </div>
       </div>
     </Link>
-  )
+  );
 }
 
 export default ProductItem;

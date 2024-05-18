@@ -46,6 +46,11 @@ export function getProfile() {
   return http.get('/profile');
 };
 
+export function like(productId) {
+  const data = { product: productId }
+  return http.post('/like', data);
+}
+
 export function createProduct(data) {
   return http.post('/products', data);
 };
@@ -66,6 +71,6 @@ export function getRatings(userId) {
   return http.get(`/user/${userId}/ratings`);
 };
 
-export function checkIfFavourite() {
-
+export function createRequest(data) {
+  return http.post('/requests', data)
 };

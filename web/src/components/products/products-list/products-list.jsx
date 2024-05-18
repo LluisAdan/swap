@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { getProducts } from '../../../services/api.service';
 import ProductItem from '../product-item/product-item';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import AuthContext from '../../../contexts/auth.context';
 
 import './product-list.css';
 
-function ProductsList({ category, limit, page,  lat, lng }) {
+function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, onSelected }) {
   const [products, setProducts] = useState(null);
   const location = useLocation();
-  const { user } = useContext(AuthContext);  
+  const { user } = useContext(AuthContext); 
+  const { id } = useParams();
 
   useEffect(() => {
     async function fetch() {
@@ -36,11 +37,11 @@ function ProductsList({ category, limit, page,  lat, lng }) {
     return <div>Loading...</div>
   };
 
-  if (location.pathname === '/profile') {
+  if (location.pathname === ('/profile')) {
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
           {products
-            .filter(product => product.owner === user.id)
+            .filter(product => product.owner === user?.id)
             .map(product => (
                 <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
           ))}
@@ -49,9 +50,21 @@ function ProductsList({ category, limit, page,  lat, lng }) {
     );
   }
 
+  if (location.pathname === (`/products/${id}/create-request`)) {
+    return (
+      <div className={`${isRequest ? 'product-list-request': 'product-list row row-cols-1 row-cols-md-3 row-cols-lg-5'}`}>
+          {products
+            .filter(product => product.owner === user.id)
+            .map(product => (
+                <div key={product.id} className="product-item col"><ProductItem product={product} isRequest selected={product.id === selected} onSelected={onSelected} /></div>
+          ))}
+      </div>
+    );
+  }
+
   if (location.pathname != '/profile') {
     return (
-        <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
+        <div className={` ${isRequest ? 'text-success': 'product-list row row-cols-1 row-cols-md-3 row-cols-lg-5'}`}>
           {products.map(product => (
             <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
           ))}

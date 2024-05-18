@@ -61,10 +61,6 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Product"
     }],
-    favoriteProducts: [{
-      type: Schema.Types.ObjectId,
-      ref: "Product"
-    }]
   },
   {
     timestamps: true,
@@ -92,6 +88,24 @@ userSchema.virtual('ratings', {
   localField: '_id',
   foreignField: 'target',
 });
+
+userSchema.virtual('requests_user', {
+  ref: 'Request',
+  localField: '_id',
+  foreignField: 'request_owner',
+});
+
+userSchema.virtual('target_user', {
+  ref: 'Request',
+  localField: '_id',
+  foreignField: 'request_target',
+});
+
+userSchema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'owner'
+})
 
 userSchema.pre('save', function(next) {
   if (this.isModified('password')) {

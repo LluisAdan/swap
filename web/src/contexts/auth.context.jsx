@@ -5,19 +5,23 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [updateUser, setUpdateUser] = useState(null);
+  const [user, setUser] = useState();
   const navigate = useNavigate();
 
   async function fetchProfile() {
-    const response = await getProfile();
-    setUser(response.data);
+    try {
+      const response = await getProfile();
+      setUser(response.data);
+    } catch(error) {
+      setUser(null);
+    }
+ 
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     if (token) fetchProfile();
-    else setUser(null)
+    else setUser(null);
   }, []);
 
   async function doLogin(data) {
@@ -30,6 +34,12 @@ export function AuthContextProvider({ children }) {
     logout();
     navigate('/login');
   }
+
+  function updateUser() {
+    fetchProfile()
+  }
+
+
 
   const value = {
     user,

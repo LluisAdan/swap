@@ -1,20 +1,37 @@
 
-.create-product {
+.create-request {
   background-color: #dfebea;
-  width: 100%;
+  margin: 0 auto;
+  width: 50%;
   padding: 30px;
   border: 1px solid #7cb9b5;
   border-radius: 10px;
   box-shadow: 0 1px 4px #3a5957;
-  margin-top: 50px;
 }
 
-.create-image {
-  width: 40%;
+.product-requested {
+  margin: 20px;
 }
 
-.create-category {
-  width: 40%;
+.requested-item-card {
+  background-color: #dfebea;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
+  margin: 10px;
+}
+
+.img-requested-product {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
+}
+
+.my-products { 
+  margin: 20px;
+  padding: 20px;
 }
 
 .div-btn-create {

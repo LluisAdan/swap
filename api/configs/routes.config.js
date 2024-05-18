@@ -4,6 +4,8 @@ const storage = require('../configs/storage.config');
 const products = require('../controllers/products.controller');
 const users = require('../controllers/users.controller');
 const ratings = require('../controllers/ratings.controller');
+const requests = require('../controllers/requests.controller');
+const like = require('../controllers/like.controller');
 const auth = require('../middlewares/auth.middleware');
 
 // Product's routes
@@ -24,5 +26,15 @@ router.get('/profile', auth.checkAuth, users.profile);
 // Rating's routes
 router.post('/ratings', auth.checkAuth, ratings.create);
 router.get('/users/:userId/ratings', ratings.list);
+
+// Request's routes
+router.post('/requests', auth.checkAuth, requests.create);
+router.get('/users/:userId/requests', requests.list);
+router.patch('/users/:userId/requests/:requestId', requests.list);
+
+
+//Likes routes
+router.post('/like', auth.checkAuth, like.create);
+router.delete('/like', auth.checkAuth, like.delete)
 
 module.exports = router;

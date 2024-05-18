@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Rating = require('../models/rating.model');
-const User = require('../models/user.model');
 
 module.exports.create = (req, res, next) => {
   Rating.create({

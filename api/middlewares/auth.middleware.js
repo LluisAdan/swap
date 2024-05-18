@@ -11,6 +11,9 @@ module.exports.checkAuth = (req, res, next) => {
 
     User.findById(sub)
       .populate('products')
+      .populate('requests_user')
+      .populate('target_user')
+      .populate('likes')
       .then((user) => {
         if (user) {
           req.user = user;

@@ -54,7 +54,7 @@ module.exports.update = (req, res, next) => {
 
   if (req.body.password) patch.password = req.body.password;
 
-  User.findById(req.params.id)
+  User.findByIdAndUpdate(req.params.id, patch)
     .then((user) => {
       if (!user) {
         res.status(404).json({ message: "User not found" });

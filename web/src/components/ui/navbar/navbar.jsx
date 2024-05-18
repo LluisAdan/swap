@@ -8,7 +8,9 @@ import './navbar.css';
 const renderNavLinkActive = ({ isActive }) => isActive ? 'nav-link active' : 'nav-link';
 
 function Navbar() {
-  const context = useContext(AuthContext);  
+  const context = useContext(AuthContext);
+
+  const pending = context.user?.target_user.filter(request => request.status === 'pending');
 
   return (
     <div className="navbar d-flex columns justify-content-around">
@@ -44,7 +46,11 @@ function Navbar() {
           {context.user && (
             <>
               <div className="nav-links d-flex justify-content-center align-items-center">
-                <li className="nav-mailbox d-flex justify-content-center align-items-center"><NavLink className={renderNavLinkActive} to="/login"><i className="icon-mailbox fa fa-envelope-o"></i></NavLink></li>
+                <li className="nav-mailbox d-flex justify-content-center align-items-center">
+                  <NavLink className={renderNavLinkActive} to="/login">
+                    <i className={`icon-mailbox fa fa-envelope-o ${pending?.length > 0 ? 'text-danger' : ''}`}></i>
+                  </NavLink>
+                </li>
               </div>
 
               <div className="nav-links d-flex justify-content-center align-items-center">

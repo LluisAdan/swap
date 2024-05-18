@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { getProductDetail } from '../../../services/api.service';
+import { getProductDetail, like } from '../../../services/api.service';
 import AuthContext from '../../../contexts/auth.context';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import RatingList from '../../ratings/rating-list/rating-list';
 import Map from '../../google/map/map';
 
@@ -9,7 +9,7 @@ import './detail-product.css';
 
 function ProductDetail({ lat, lng }) {
   const [product, setProduct] = useState(null);
-  const { user } = useContext(AuthContext);  
+  const { user, updateUser } = useContext(AuthContext);  
   const { id } = useParams();
   const navigate = useNavigate();
   const [isFavorited, setIsFavorited] = useState(false);
@@ -25,14 +25,11 @@ function ProductDetail({ lat, lng }) {
 
         const { data } = await getProductDetail(id, query);
         setProduct(data);
-        
-        console.log(user)
 
         if (user) {
-          console.log(user)
-          if (user.favouriteProducts) {
-            setIsFavorited(user.favouriteProducts.includes(id));
-            console.log(setIsFavorited);
+          if (user.likes) {
+            const isFav = user.likes.some(product => product.product === id)
+            setIsFavorited(isFav);
           }
         }
 
@@ -42,13 +39,17 @@ function ProductDetail({ lat, lng }) {
         }
       }
     }
-    fetch();
-  }, [id, lat, lng]);
+
+    if (user !== undefined) {
+      fetch()
+    }
+  }, [id, lat, lng, user]);
 
   const toggleFavorite = () => {
-    const updatedFavorites = isFavorited ? user.favouriteProducts.filter(productId => productId !== id) : [...user.favouriteProducts, id];
-    
-    updateUser({ ...user, favouriteProducts: updatedFavorites });
+    const updatedFavorites = isFavorited ? user.likes.filter(productId => productId !== id) : [...user.favoriteProducts, id];
+
+    like(id);
+    console.info(user)
     setIsFavorited(!isFavorited);
   };
 
@@ -76,7 +77,10 @@ function ProductDetail({ lat, lng }) {
             </div>
 
               <div className="div-btn-match d-flex justify-content-center align-items-center">
-                <button type="button" className="btn-match">Match</button>
+                <Link to={`/products/${product.id}/create-request`}>
+                  <button type="button" className="btn-match">Match</button>
+                </Link>
+
               </div>
           </div>
         </div>
