@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, forwardRef } from 'react';
 
 const autocompleteOptions = {
   componentRestrictions: { country: 'es' },
   type: ['address']
 };
 
-function AutocompleteInput({ onPlaceChange }) {
+const AutocompleteInput = forwardRef(({ onPlaceChange }, ref) => {
   const autocompleteInputRef = useRef();
 
   useEffect(() => {
@@ -20,19 +20,19 @@ function AutocompleteInput({ onPlaceChange }) {
         };
         onPlaceChange(location);
       }
-    })
+    });
 
     return () => {
       window.google.maps.event.clearListeners(autocomplete, "place_changed");
-    }
-  }, []);
+    };
+  }, [onPlaceChange]);
 
   return (
     <div className="w-50 form-floating">
-      <input ref={autocompleteInputRef} type="text" className="form-control" id="autocomplete-input" placeholder=" " />
+      <input ref={ref || autocompleteInputRef} type="text" className="form-control" id="autocomplete-input" placeholder=" " />
       <label htmlFor="autocomplete-input">Find address...</label>
     </div>
-  )
-}
+  );
+});
 
 export default AutocompleteInput;

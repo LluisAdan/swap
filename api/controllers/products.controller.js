@@ -4,6 +4,13 @@ const Product = require('../models/product.model');
 module.exports.create = (req, res, next) => {
 
   if (req.file) req.body.image = req.file.path;
+
+  let location = req.body.location;
+  try {
+    location = JSON.parse(location);
+  } catch(error) {
+    return res.status(400).json({ error: "Invalid location format" });
+  }
   
   Product.create({
       title: req.body.title,
@@ -11,7 +18,7 @@ module.exports.create = (req, res, next) => {
       category: req.body.category,
       image: req.body.image,
       price: req.body.price,
-      location: req.body.location, // geojson
+      location: location,
       owner: req.user.id
     })
     .then((product) => res.status(201).json(product))

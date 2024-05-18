@@ -1,8 +1,8 @@
-import React from 'react';
-import {useForm } from 'react-hook-form';
-import categoriesData from  '../../../data/categories.json';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import categoriesData from '../../../data/categories.json';
 import pricesData from '../../../data/prices.json';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createProduct } from '../../../services/api.service';
 import AutocompleteInput from '../../google/autocomplete/autocomplete-input';
 
@@ -10,16 +10,7 @@ import './create-product-form.css';
 
 function ProductForm() {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const lat = searchParams.get('lat');
-  const lng = searchParams.get('lng');
-
-  const handlePlaceChange = ({ lat, lng}) => {
-    navigate({
-      pathname: '/create-product',
-      search: `?lat=${lat}&lng=${lng}`
-    });
-  };
+  const [location, setLocation] = useState({ lat: null, lng: null });
 
   const {
     register,
@@ -27,15 +18,26 @@ function ProductForm() {
     formState: { errors },
   } = useForm();
 
+  const handlePlaceChange = ({ lat, lng }) => {
+    setLocation({ lat, lng });
+  };
+
   const handleProductSubmit = async (product) => {
+
     const data = new FormData();
     data.append("title", product.title);
     data.append("description", product.description);
     data.append("image", product.image[0]);
     data.append("price", product.price);
     data.append("category", product.category);
-    data.append(lat, product.location.lat);
-    data.append(lng, product.location.lng);
+
+    const locationData = {
+      type: 'Point',
+      coordinates: [location.lng, location.lat]
+    };
+
+    data.append("location", JSON.stringify(locationData)); 
+
 
     try {
       const res = await createProduct(data);
@@ -95,11 +97,8 @@ function ProductForm() {
 
           <div className="col d-flex align-items-center">
             <div className="w-100 form-floating mb-2">
-
-              <AutocompleteInput onPlaceChange={handlePlaceChange} className={`form-control ${errors.location ? 'is-invalid' : ''}`} {...register("location", { required: 'Location is required'})} />
+              <AutocompleteInput onPlaceChange={handlePlaceChange} />
               {errors.location && (<div className='invalid-feedback'>{errors.location.message}</div>)}
-
-              
             </div>
           </div>
 
@@ -109,15 +108,7 @@ function ProductForm() {
         </div>
       </div>
     </form>
-      )
+  );
 }
 
 export default ProductForm;
-
-
-{/*
-<input type="text" className={`form-control ${errors.location ? 'is-invalid' : ''}`} {...register("location", { required: 'Location is required'})} />
-              <label>Location</label>
-              {errors.location && (<div className='invalid-feedback'>{errors.location.message}</div>)}
-
-*/}

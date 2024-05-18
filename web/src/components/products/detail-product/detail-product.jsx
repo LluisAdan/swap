@@ -105,7 +105,7 @@ function ProductDetail({ lat, lng }) {
         </div>
 
         <div className="map-product d-flex justify-content-center m-20">
-          <Map center={{lat: parseFloat(product.location.coordinates[1]), lng: parseFloat(product.location.coordinates[0])}} />
+          <Map center={{lat: parseFloat(product.location?.coordinates[1]), lng: parseFloat(product.location?.coordinates[0])}} />
         </div>
 
         <div className="rating-product-detail">
