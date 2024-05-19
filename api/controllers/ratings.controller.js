@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Rating = require('../models/rating.model');
 
 module.exports.create = (req, res, next) => {
+  const { userId } = req.params;
+
   Rating.create({
     rating: req.body.rating,
     text: req.body.text,
@@ -33,6 +35,7 @@ module.exports.list = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
   Rating.findByIdAndDelete(req.params.id)
+  .populate("target")
     .then((rating) => {
       if (rating) {
         res.status(204).send();

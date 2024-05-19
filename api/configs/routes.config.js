@@ -12,7 +12,7 @@ const auth = require('../middlewares/auth.middleware');
 router.post('/products', auth.checkAuth, storage.single('image'), products.create);
 router.get('/products', products.list);
 router.get('/products/:id', products.detail);
-router.patch('/products/:id', auth.checkAuth, auth.isOwnerProduct, storage.single('image'), products.update);
+router.patch('/products/:id', auth.checkAuth, storage.single('image'), products.update);
 router.delete('/products/:id', auth.checkAuth, auth.isOwnerProduct, products.delete);
 
 // User's routes
@@ -24,14 +24,13 @@ router.post('/login', users.login);
 router.get('/profile', auth.checkAuth, users.profile);
 
 // Rating's routes
-router.post('/ratings', auth.checkAuth, ratings.create);
+router.post('/users/:userId/ratings', auth.checkAuth, ratings.create);
 router.get('/users/:userId/ratings', ratings.list);
 
 // Request's routes
 router.post('/requests', auth.checkAuth, requests.create);
-router.get('/users/:userId/requests', requests.list);
-router.patch('/users/:userId/requests/:requestId', requests.list);
-
+router.get('/users/:userId/requests', auth.checkAuth, requests.list);
+router.patch('/requests/:id', auth.checkAuth, requests.update);
 
 //Likes routes
 router.post('/like', auth.checkAuth, like.create);

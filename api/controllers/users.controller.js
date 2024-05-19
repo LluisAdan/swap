@@ -46,6 +46,7 @@ module.exports.update = (req, res, next) => {
     lastName: req.body.lastName,
     username: req.body.username,
     email: req.body.email,
+    phone: req.body.phone,
     birthDate: req.body.birthDate,
     genre: req.body.genre
   };

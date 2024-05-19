@@ -1,5 +1,6 @@
 [
-  "pending",
-  "acepted",
-  "denied"
+  "Pending",
+  "Accepted",
+  "Declined",
+  "Finalized"
 ]

@@ -9,7 +9,7 @@ const productSchema = new Schema(
       type: String,
       required: 'Title is required',
       minLength: [2, 'Title needs at least 2 chars'],
-      maxLength: [38, 'Invalid title. Maximum characters: 38']
+      maxLength: [45, 'Invalid title. Maximum characters: 45']
     },
     description: {
       type: String,
@@ -31,7 +31,7 @@ const productSchema = new Schema(
       enum: prices,
       required: 'Price range required'
     },
-    availability: {
+    available: {
       type: Boolean,
       default: true
     },
@@ -63,6 +63,18 @@ const productSchema = new Schema(
     }
   }
 );
+
+productSchema.virtual('requests_product', {
+  ref: 'Request',
+  localField: '_id',
+  foreignField: 'product_owner',
+});
+
+productSchema.virtual('target_product', {
+  ref: 'Request',
+  localField: '_id',
+  foreignField: 'product_target',
+});
 
 productSchema.index({ location: '2dsphere' });
 

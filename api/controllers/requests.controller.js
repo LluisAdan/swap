@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Request = require('../models/request.model');
 
 module.exports.create = (req, res, next) => {
@@ -12,21 +11,37 @@ module.exports.create = (req, res, next) => {
     res.status(201).json(request);
   })
   .catch((err) => {
-    if (err instanceof mongoose.Error.ValidationError) {
-      res.status(400).json(err.errors);
-    } else {
-      next(err);
-    }
+    next(err);
   });
 };
 
 module.exports.list = (req, res, next) => {
   const { userId } = req.params;
 
-  Request.find({ target_user: userId })
-  .populate("requests_user")
+  Request.find({ request_target: userId })
+  .populate("request_target")
+  .populate("request_owner")
+  .populate("product_target")
+  .populate("product_owner")
   .then((requests) => {
     res.json(requests);
   })
   .catch(next);
+};
+
+module.exports.update = (req, res, next) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  Request.findByIdAndUpdate(id, { status }, { new: true, runValidators: true })
+
+    .then((request) => {
+      if (!request) {
+        return res.status(404).json({ message: "Request not found" });
+      }
+      res.status(200).json(request);
+    })
+    .catch((err) => {
+      next(err);
+    });
 };

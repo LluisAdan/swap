@@ -5,12 +5,12 @@
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715546111/Swap/products/macbookPro_tncrqk.jpg",
     "category": "Electronic",
     "price": "1001-3000€",
-    "availability": true,
+    "available": true,
     "location": {
       "type": "Point",
       "coordinates": [2.101210, 41.374350]
     },
-    "owner":"6647665a0be8b9a42dc29f23"
+    "owner":"6649019b830e99b6343ab8f0"
   },
   {
     "title": "The Limits of the Foundation, Isaac Asimov",
@@ -18,12 +18,12 @@
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715546594/Swap/products/asimov_hj2bw7.jpg",
     "category": "Book, Film and Music",
     "price": "1-50€",
-    "availability": true,
+    "available": true,
     "location": {
       "type": "Point",
       "coordinates": [2.059380, 41.932560]
     },
-    "owner":"6647665a0be8b9a42dc29f23"
+    "owner":"6649019b830e99b6343ab8f0"
   },
   {
     "title": "Dressing table made of mahogany",
@@ -31,12 +31,12 @@
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715547091/Swap/products/tocador_rg29cy.jpg",
     "category": "Home",
     "price": "501-1000€",
-    "availability": true,
+    "available": true,
     "location": {
       "type": "Point",
       "coordinates": [-0.886481, 41.630072]
     },
-    "owner":"6647665a0be8b9a42dc29f23"
+    "owner":"6649019b830e99b6343ab8f0"
   },
   {
     "title": "Adidas Forum Low Bad Bunny Back to School",
@@ -44,12 +44,12 @@
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715593050/Swap/products/adidas_utzpjc.jpg",
     "category": "Fashion",
     "price": "51-200€",
-    "availability": true,
+    "available": true,
     "location": {
       "type": "Point",
       "coordinates": [-3.613750, 40.404040]
     },
-    "owner": "6643bfa35b985fa0a23f3c9a"
+    "owner": "664901d9830e99b6343ab8f3"
   },
   {
     "title": "XCELERATE BASKET",
@@ -57,12 +57,12 @@
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715593404/Swap/products/basket_nwtl7s.jpg",
     "category": "Sport",
     "price": "1-50€",
-    "availability": true,
+    "available": true,
     "location": {
       "type": "Point",
       "coordinates": [-3.702073, 40.415923]
     },
-    "owner":"6643bfbdac2b41401dc78776"
+    "owner":"664901d9830e99b6343ab8f3"
   },
   {
     "title": "Nintendo Switch",
@@ -70,11 +70,11 @@
     "image": "https://res.cloudinary.com/djfnazn3y/image/upload/v1715593783/Swap/products/switch_y68glm.jpg",
     "category": "Electronic",
     "price": "201-500€",
-    "availability": true,
+    "available": true,
     "location": {
       "type": "Point",
       "coordinates": [-0.705450, 40.953590]
     },
-    "owner":"6643bfbdac2b41401dc78776"
+    "owner":"664901d9830e99b6343ab8f3"
   }
 ]

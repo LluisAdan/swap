@@ -59,18 +59,34 @@ export function getProducts(query) {
   return http.get('/products', { params: query });
 };
 
-export function getProductDetail(id, query) {
-  return http.get(`/products/${id}`, { params: query });
+export function getProductDetail(id) {
+  return http.get(`/products/${id}`);
+};
+
+export function updateProduct(id, data) {
+  return http.patch(`/products/${id}`, data);
 };
 
 export function logout() {
   localStorage.removeItem('token');
 };
 
+export function createRating(userId, data) {
+  return http.post(`/users/${userId}/ratings`, data);
+};
+
 export function getRatings(userId) {
-  return http.get(`/user/${userId}/ratings`);
+  return http.get(`/users/${userId}/ratings`);
 };
 
 export function createRequest(data) {
-  return http.post('/requests', data)
+  return http.post('/requests', data);
+};
+
+export function getRequests(userId) {
+  return http.get(`/users/${userId}/requests`);
+}
+
+export function updateRequest(id, data) {
+  return http.patch(`/requests/${id}`, data);
 };

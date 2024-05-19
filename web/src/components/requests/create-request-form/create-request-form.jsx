@@ -41,8 +41,7 @@ function CreateRequest() {
         product_target: productRequested.id
       }
       const res = await createRequest(request);
-      console.info(res)
-      //navigate('/profile');
+      navigate('/profile');
     } catch (error) { 
       console.error(error);
     }

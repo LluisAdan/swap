@@ -41,7 +41,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
           {products
-            .filter(product => product.owner === user?.id)
+            .filter(product => product.owner === user?.id && product.available)
             .map(product => (
                 <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
           ))}
@@ -54,7 +54,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     return (
       <div className={`${isRequest ? 'product-list-request': 'product-list row row-cols-1 row-cols-md-3 row-cols-lg-5'}`}>
           {products
-            .filter(product => product.owner === user.id)
+            .filter(product => product.owner === user.id && product.available)
             .map(product => (
                 <div key={product.id} className="product-item col"><ProductItem product={product} isRequest selected={product.id === selected} onSelected={onSelected} /></div>
           ))}
@@ -65,13 +65,14 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   if (location.pathname != '/profile') {
     return (
         <div className={` ${isRequest ? 'text-success': 'product-list row row-cols-1 row-cols-md-3 row-cols-lg-5'}`}>
-          {products.map(product => (
+          {products
+          .filter(product => product.available)
+          .map(product => (
             <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
           ))}
         </div>
     );
   }
-
 }
 
 export default ProductsList;

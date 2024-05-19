@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const status = require('../data/status.json')
+const status = require('../data/status.json');
 
 const requestSchema = new Schema(
   {
     status: {
       type: String,
       enum: status,
-      default: "pending"
+      default: "Pending"
     },  
     request_owner: {
       type: Schema.Types.ObjectId,
@@ -24,7 +24,7 @@ const requestSchema = new Schema(
     product_target: {
       type: Schema.Types.ObjectId,
       ref: "Product"
-    },
+    }
   },
 
   {

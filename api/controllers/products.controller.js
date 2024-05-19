@@ -87,10 +87,12 @@ module.exports.detail = (req, res, next) => {
 };
 
 module.exports.update = (req, res, next) => {
-  Product.findByIdAndUpdate(req.params.id, req.body, {  // Cambiar req.body
+  Product.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true
   })
+    .populate("product_owner")
+    .populate("product_target")
     .then((product) => (product) ? res.json(product) : res.status(404).json({ message: "Product not found"}))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {

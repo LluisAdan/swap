@@ -38,7 +38,6 @@ function ProductForm() {
 
     data.append("location", JSON.stringify(locationData)); 
 
-
     try {
       const res = await createProduct(data);
       navigate('/profile');

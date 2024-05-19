@@ -1,13 +1,12 @@
 [
   {
-    "name": "Lluis",
-    "lastName": "Adan",
-    "username": "Mayser",
+    "name": "Lluís",
+    "lastName": "Adán",
+    "username": "md3",
     "avatar": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     "email": "lluis.adan@example.com",
     "password": "12345678",
     "genre": "Male",
-    "preferences": ["Electronic", "Sport"],
     "birthDate": "10/10/1992"
   },
   {
@@ -18,7 +17,6 @@
     "email": "cris.ro@example.com",
     "password": "12345678",
     "genre": "Female",
-    "preferences": ["Fashion", "Book, Film and Music"],
     "birthDate": "04/07/1988"
   },
   {
@@ -29,7 +27,6 @@
     "email": "alber.mar@example.com",
     "password": "12345678",
     "genre": "Other",
-    "preferences": ["Sport", "Home"],
     "birthDate": "11/11/1996"
   },
   {
@@ -40,7 +37,6 @@
     "email": "raquel.ramirez@example.com",
     "password": "12345678",
     "genre": "Female",
-    "preferences": ["Sport", "Book, Film and Music"],
     "birthDate": "09/14/1993"
   },
   {
@@ -51,7 +47,6 @@
     "email": "jose.fernandez@example.com",
     "password": "12345678",
     "genre": "Male",
-    "preferences": ["Fashion", "Sport"],
     "birthDate": "05/12/2005"
   }
 ]

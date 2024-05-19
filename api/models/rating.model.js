@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ratings = require('../data/ratings.json');
 
 const ratingSchema = new Schema(
     {
         rating: {
-          type: Number,
-          required: [true, 'Rating is required'],
-          min: 0,
-          max: 5
+          type: String,
+          enum: ratings
         },
         text: {
           type: String,
-          required: [true, 'Rating text is required'],
           maxLength: [200, 'Invalid rating. Maximum characters: 200']
         },
         owner: {
