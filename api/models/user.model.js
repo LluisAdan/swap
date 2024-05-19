@@ -57,10 +57,6 @@ const userSchema = new Schema(
       type: String,
       enum: genre
     },
-    history: [{
-      type: Schema.Types.ObjectId,
-      ref: "Product"
-    }],
   },
   {
     timestamps: true,

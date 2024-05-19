@@ -76,6 +76,12 @@ productSchema.virtual('target_product', {
   foreignField: 'product_target',
 });
 
+productSchema.virtual('fav_product', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'favorite_product'
+})
+
 productSchema.index({ location: '2dsphere' });
 
 const Product = mongoose.model('Product', productSchema);

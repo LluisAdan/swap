@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const likesSchema = new Schema(
     {
-        owner: {
+        like_owner: {
           type: Schema.Types.ObjectId,
           ref: "User"
         },
-        product: {
+        favorite_product: {
           type: Schema.Types.ObjectId,
           ref: "Product"
         }

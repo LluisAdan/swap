@@ -33,7 +33,7 @@ router.get('/users/:userId/requests', auth.checkAuth, requests.list);
 router.patch('/requests/:id', auth.checkAuth, requests.update);
 
 //Likes routes
-router.post('/like', auth.checkAuth, like.create);
-router.delete('/like', auth.checkAuth, like.delete)
+router.post('/products/:productId/like', auth.checkAuth, like.create);
+router.delete('/products/:productId/like', auth.checkAuth, like.delete);
 
 module.exports = router;
