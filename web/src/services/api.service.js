@@ -95,6 +95,10 @@ export function createLike(productId) {
   return http.post(`/products/${productId}/like`);
 }
 
+export function getLikes(userId) {
+  return http.get('/likes');
+}
+
 export function deleteLike(productId) {
   return http.delete(`/products/${productId}/like`);
 }

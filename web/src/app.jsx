@@ -30,6 +30,7 @@ function App() {
               <Route path="/register" element={<CreateUser />} />
               <Route path="/login" element={<Login/>} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/favorites" element={<Profile />} />
               <Route path="/profile/mailbox" element={<PrivateRoute><Mailbox /></PrivateRoute>} />
               <Route path="/users/:id" element={<PrivateRoute><UpdateUser /></PrivateRoute>} />
               <Route path="products" element={<Products />} />

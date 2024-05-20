@@ -18,6 +18,17 @@ module.exports.create = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.list = (req, res, next) => {
+  const userId = req.user.id;
+
+  Like.find({ like_owner: userId })
+  .populate("fav_product")
+  .then((likes) => {
+    res.json(likes);
+  })
+  .catch(next);
+};
+
 module.exports.delete = (req, res, next) => {
 
   Like.findOneAndDelete()

@@ -54,20 +54,11 @@ function Navbar() {
               </div>
 
               <div className="nav-links d-flex justify-content-center align-items-center">
-                <div className="dropdown d-flex align-items-center gap-2 rounded-pill" type="button">
-                    <img className="rounded-circle object-fit-cover" data-bs-toggle="dropdown" src={context.user.avatar} alt="Avatar" width="55" height="55"/>
-                
-                    <ul className="dropdown-menu dropdown-menu">
-                      <li>
-                        <Link to="/profile">
-                          <button className="btn-profile dropdown-item">See profile</button>
-                        </Link>
-                      </li>
-                      <li>
-                        <button onClick={context.doLogout} className="dropdown-item">Logout</button>
-                      </li>
-                    </ul>
-                  </div>
+                <div className="d-flex align-items-center " type="button">
+                  <Link to="/profile" className="nav-item-img">
+                    <img className="rounded-circle object-fit-cover" src={context.user.avatar} alt="Avatar" width="55" height="55"/>
+                  </Link>
+                </div>
               </div>
                             
               <div className="nav-links d-flex justify-content-center align-items-center">

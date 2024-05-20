@@ -11,6 +11,10 @@ function StarsProfile() {
 
   useEffect(() => {
     async function fetchRatings() {
+      if (!user || !user.id) {
+        return;
+      }
+      
       try {
         const response = await getRatings(user.id);
         const ratings = response.data;
@@ -19,9 +23,10 @@ function StarsProfile() {
           const total = ratings.reduce((sum, { rating }) => sum + parseFloat(rating), 0);
           const average = total / ratings.length;
           setAvg(average);
-          setCant(ratings.length)
+          setCant(ratings.length);
         } else {
           setAvg(0);
+          setCant(0);
         }
       } catch (error) {
         console.error("Error fetching ratings:", error);

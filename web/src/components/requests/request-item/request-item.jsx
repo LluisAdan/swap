@@ -20,6 +20,7 @@ function RequestItem({ request, onUpdateStatus }) {
     }
   };
 
+  console.log(request.request_owner.phone)
 
   const handleAccept = () => {
     onUpdateStatus(request.id, 'Accepted');
@@ -53,12 +54,20 @@ function RequestItem({ request, onUpdateStatus }) {
     if (request.status !== "Accepted" && request.status !== "Declined" && request.status !== "Finalized") {
       return (
         <React.Fragment>
-          <Link to="/profile/mailbox">
-            <button onClick={handleDecline}>Decline</button>
-          </Link>
-          <Link to="/profile/mailbox">
-            <button onClick={handleAccept}>Accept</button>
-          </Link>
+          <div className="d-flex justify-content-around align-items-center">
+            <div className="btn-status d-flex justify-content-center align-items-center"> 
+              <Link to="/profile/mailbox">
+                <button className="btn-status-request mx-3" onClick={handleDecline}>DECLINE</button>
+              </Link>
+            </div>
+            
+            <div className="btn-status d-flex justify-content-center align-items-center"> 
+              <Link to="/profile/mailbox">
+                <button className="btn-status-request" onClick={handleAccept}>ACCEPT</button>
+              </Link>
+            </div>
+
+          </div>
         </React.Fragment>
       );
     };
@@ -66,10 +75,17 @@ function RequestItem({ request, onUpdateStatus }) {
     if (request.status != "Declined" && request.status !== "Finalized") {
       return (
         <React.Fragment>
-          <h5>{request.request_owner.phone}</h5>
-          <Link to={`/users/${request.product_owner?.owner}/create-rating`}>
-            <button onClick={handleFinalize}>Assess and finalize</button>
-          </Link>
+          <div className="d-flex row justify-content-center align-items-center">
+            <div className="d-flex justify-content-center">
+              <p>User's phone: {request.request_owner.phone}</p>
+            </div>
+
+            <div className="btn-status-finalize d-flex justify-content-center align-items-center">
+              <Link className="" to={`/users/${request.product_owner?.owner}/create-rating`}>
+                <button className="btn-finalize" onClick={handleFinalize}>ASSESS AND FINALIZE</button>
+              </Link>
+            </div>
+          </div>
         </React.Fragment>
       );
     }
@@ -78,27 +94,31 @@ function RequestItem({ request, onUpdateStatus }) {
   };
 
   return (
-    <div className="request-card d-flex cols justify-content-center align-items-center">
-      <div className="prueba">
-        <h5>Product que te ofrecen</h5>
-        <div>
+    <div className="request-card d-flex cols justify-content-around align-items-center">
+      <Link className="product-offered d-flex row justify-content-center align-items-center" to={`/products/${request.product_owner?.id}`}>
+        <div className="d-flex justify-content-center align-items-center">
           <img className="img-product-request" src={request.product_owner?.image} alt={request.product_owner?.title} />
-          {request.product_owner?.title}
         </div>
-        <div>
-          {request.request_owner.name}
+
+        <div className="d-flex justify-content-center my-3">
+          <h5 className="title-product-request">{request.product_owner?.title}</h5>
+        </div>
+      </Link>
+
+      <div className="product-mine d-flex row justify-content-center align-items-center">
+        <div className="d-flex justify-content-center align-items-center">
+          <img className="img-myproduct-request" src={request.product_target?.image} alt={request.product_target?.title} />
         </div>
       </div>
 
-      <div>
-        <h5>Product que quieres cambiar</h5>
-        <img className="img-product-request" src={request.product_target?.image} alt={request.product_target?.title} />
-        {request.product_target?.title}
-      </div>
-
-      <div>
+      <div className="status-request d-flex row justify-content-center align-items-center">
+        <div className="d-flex justify-content-center my-5">
         <h5>Status: {request.status}</h5>
-        {renderActionButtons()}
+        </div>
+        <div className="d-flex justify-content-center align-items-center">
+          {renderActionButtons()}
+        </div>
+
       </div>
     </div>
   );

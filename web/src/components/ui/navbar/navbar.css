@@ -84,6 +84,16 @@
   transition: 300ms;
 }
 
+.nav-item-img :hover {
+  transition: 300ms;
+  width: 65px;
+  height: 65px;
+}
+
+.nav-item-img :link {
+  transition: 300ms;
+}
+
 .add-product {
   padding: 5px;
   border: 1px solid #3a5957; 

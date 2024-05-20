@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { getProducts } from '../../../services/api.service';
+import { getProducts, getLikes } from '../../../services/api.service';
 import ProductItem from '../product-item/product-item';
 import { useLocation, useParams } from 'react-router-dom';
 import AuthContext from '../../../contexts/auth.context';
@@ -15,16 +15,22 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   useEffect(() => {
     async function fetch() {
       try {
-        const query = {};
-        if (category) query.category = category;
-        if (limit) query.limit = limit;
-        if (page) query.page = page;
-        if (lat && lng) {
-          query.lat = lat;
-          query.lng = lng;
+        let response;
+
+        if (location.pathname === "/profile/favorites") {
+          response = await getLikes(user.id);
+        } else {
+          const query = {};
+          if (category) query.category = category;
+          if (limit) query.limit = limit;
+          if (page) query.page = page;
+          if (lat && lng) {
+            query.lat = lat;
+            query.lng = lng;
         }
         
-        const response = await getProducts(query);
+        response = await getProducts(query);
+        }
         setProducts(response.data);
       } catch (error) {
         console.error(error);
@@ -40,12 +46,11 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   if (location.pathname === ('/profile')) {
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
-          {products
-            .filter(product => product.owner === user?.id && product.available)
-            .map(product => (
-                <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
-          ))}
-
+        {products
+          .filter(product => product.owner === user?.id && product.available)
+          .map(product => (
+              <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
+        ))}
       </div>
     );
   }
@@ -62,17 +67,31 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     );
   }
 
-  if (location.pathname != '/profile') {
+  if (location.pathname === '/profile/favorites') {
     return (
-        <div className={` ${isRequest ? 'text-success': 'product-list row row-cols-1 row-cols-md-3 row-cols-lg-5'}`}>
+      <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
           {products
-          .filter(product => product.available)
-          .map(product => (
-            <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
+            .filter(product => product.available)
+            .map(product => (
+                <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
           ))}
-        </div>
+
+      </div>
     );
-  }
+  };
+
+  if (location.pathname === '/home') {
+    return (
+      <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
+          {products
+            .filter(product => product.available)
+            .map(product => (
+                <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
+          ))}
+
+      </div>
+    );
+  };
 }
 
 export default ProductsList;

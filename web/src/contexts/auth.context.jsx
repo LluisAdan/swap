@@ -32,7 +32,7 @@ export function AuthContextProvider({ children }) {
   function doLogout() {
     setUser(null);
     logout();
-    navigate('/login');
+    navigate('/');
   }
 
   function updateUser() {

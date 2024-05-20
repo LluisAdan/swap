@@ -100,7 +100,7 @@ userSchema.virtual('target_user', {
 userSchema.virtual('likes', {
   ref: 'Like',
   localField: '_id',
-  foreignField: 'owner'
+  foreignField: 'like_owner'
 })
 
 userSchema.pre('save', function(next) {
