@@ -42,8 +42,8 @@ function ProductItem({ product, isRequest, selected, onSelected }) {
         </div>
 
         <div className="card-body d-flex row">
-          <div className="product-title mx-2 d-flex justify-content-start">
-            <h5>{product.title}</h5>
+          <div className="d-flex justify-content-start">
+            <h5 className="product-title">{product.title}</h5>
           </div>
 
           <div className="container">
@@ -52,10 +52,10 @@ function ProductItem({ product, isRequest, selected, onSelected }) {
 
           <div className="product-info d-flex justify-content-around align-items-center">
             <div className="product-price d-flex justify-content-center align-items-center">
-              <p>{product.price}</p>
+              <span>{product.price}</span>
             </div>
             <div className="product-category d-flex justify-content-center align-items-center">
-              <p>{product.category}</p>
+              <span className="product-item-category">{product.category}</span>
             </div>
           </div>
         </div>

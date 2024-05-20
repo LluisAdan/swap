@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   async function fetchProfile() {
@@ -14,14 +14,13 @@ export function AuthContextProvider({ children }) {
       setUser(response.data);
     } catch(error) {
       setUser(null);
+      console.error(error);
     }
- 
   }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) fetchProfile();
-    else setUser(null);
   }, []);
 
   async function doLogin(data) {
@@ -31,6 +30,7 @@ export function AuthContextProvider({ children }) {
 
   function doLogout() {
     setUser(null);
+    localStorage.removeItem("token");
     logout();
     navigate('/');
   }

@@ -4,7 +4,7 @@ import categoriesData from '../../../data/categories.json';
 import pricesData from '../../../data/prices.json';
 import { useNavigate } from 'react-router-dom';
 import { createProduct } from '../../../services/api.service';
-import AutocompleteInput from '../../google/autocomplete/autocomplete-input';
+import AutocompleteProduct from '../../../components/google/autocomplete-product/autocomplete-product';
 
 import './create-product-form.css';
 
@@ -96,7 +96,7 @@ function ProductForm() {
 
           <div className="col d-flex align-items-center">
             <div className="w-100 form-floating mb-2">
-              <AutocompleteInput onPlaceChange={handlePlaceChange} />
+              <AutocompleteProduct onPlaceChange={handlePlaceChange} />
               {errors.location && (<div className='invalid-feedback'>{errors.location.message}</div>)}
             </div>
           </div>

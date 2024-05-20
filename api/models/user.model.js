@@ -51,7 +51,9 @@ const userSchema = new Schema(
     },
     phone: {
       type: String,
-      maxLength: [16, 'Invalid phone. Maximum characters: 16']
+      minLength: [8, 'Invalid phone. 9-16 characters'],
+      maxLength: [16, 'Invalid phone. 9-16 characters'],
+      required: 'Phone is required'
     },
     genre: {
       type: String,

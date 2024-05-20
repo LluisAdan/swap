@@ -9,7 +9,6 @@ import './login-user-form.css';
 
 function Login() {
   const navigate = useNavigate();
-  const { showAlert } = useAlert();
   const { doLogin } = useContext(AuthContext);
 
   const {
@@ -21,10 +20,9 @@ function Login() {
   async function onSubmit(data) { 
     try {
       await doLogin(data);
-
-      navigate('/');
+      navigate('/home');
     } catch (err) {
-      showAlert('Invalid credentials');
+      console.log('Invalid credentials');
     }
   };
   

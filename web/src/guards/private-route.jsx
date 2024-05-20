@@ -4,10 +4,10 @@ import { Navigate } from 'react-router-dom';
 
 function PrivateRoute({ children }) {
   const { user } = useContext(AuthContext);
+  
   if (user === undefined) {
     return null;
   } else if (user === null) {
-    console.info(123123)
     return <Navigate to="/login" />
   } else {
     return <>{children}</>

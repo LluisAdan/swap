@@ -42,8 +42,13 @@ function RequestsList() {
     <div className="d-flex justify-content-center">
       <div>
         {requests
-        .map(request => <div className="product-item col"><RequestItem key={request.id} request={request} onUpdateStatus={handleUpdateStatus}/></div>)
-        .sort((a, b) => a.status - b.status)}
+        .sort((a, b) => {
+          if(a.status < b.status) return 1; 
+          if(a.status > b.status) return -1; 
+          return 0;
+        })
+        .map(request => <div className="product-item col"><RequestItem key={request.id} request={request} onUpdateStatus={handleUpdateStatus}/></div>)}
+        
       </div>
     </div>
   );

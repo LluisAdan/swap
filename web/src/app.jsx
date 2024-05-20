@@ -33,7 +33,7 @@ function App() {
               <Route path="/profile/favorites" element={<Profile />} />
               <Route path="/profile/mailbox" element={<PrivateRoute><Mailbox /></PrivateRoute>} />
               <Route path="/users/:id" element={<PrivateRoute><UpdateUser /></PrivateRoute>} />
-              <Route path="products" element={<Products />} />
+              <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/create-product" element={<PrivateRoute><CreateProduct /></PrivateRoute>} />
               <Route path="/products/:id/create-request" element={<PrivateRoute><CreateRequest /></PrivateRoute>} />

@@ -7,7 +7,7 @@
 .product-item-card {
   background-color: #dfebea;
   width: 280px;
-  height: 380px;
+  height: 400px;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 1px 4px #3a5957;
@@ -49,17 +49,30 @@
   box-shadow: 0 1px 4px #3a5957;
 }
 
-.card-body {
-  height: 100px; 
-}
-
 .product-price {
   width: 100px;
-  height: 30px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
 }
 
 .product-category {
   width: 100px;
-  height: 30px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
 }
 
+.product-title {
+  font-size: 20px;
+  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden; /* Oculta el desbordamiento */
+  text-overflow: ellipsis; /* Agrega los puntos suspensivos */
+  width: 220px; /* Establece un ancho fijo para el contenedor */
+}
+
+.product-item-category {
+  font-size: 18px;
+  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden; /* Oculta el desbordamiento */
+  text-overflow: ellipsis; /* Agrega los puntos suspensivos */
+  width: 80px; /* Establece un ancho fijo para el contenedor */
+}

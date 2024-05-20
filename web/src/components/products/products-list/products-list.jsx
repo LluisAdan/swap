@@ -17,7 +17,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
       try {
         let response;
 
-        if (location.pathname === "/profile/favorites") {
+        if (user && location.pathname === "/profile/favorites") {
           response = await getLikes(user.id);
         } else {
           const query = {};
@@ -43,7 +43,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     return <div>Loading...</div>
   };
 
-  if (location.pathname === ('/profile')) {
+  if (user && location.pathname === ('/profile')) {
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
         {products
@@ -55,7 +55,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     );
   }
 
-  if (location.pathname === (`/products/${id}/create-request`)) {
+  if (user && location.pathname === (`/products/${id}/create-request`)) {
     return (
       <div className={`${isRequest ? 'product-list-request': 'product-list row row-cols-1 row-cols-md-3 row-cols-lg-5'}`}>
           {products
@@ -67,7 +67,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     );
   }
 
-  if (location.pathname === '/profile/favorites') {
+  if (user && location.pathname === '/profile/favorites') {
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
           {products

@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, forwardRef } from 'react';
 
-import './autocomplete-input.css';
+import './autocomplete-product.css';
 
 const autocompleteOptions = {
   componentRestrictions: { country: 'es' },
   type: ['address']
 };
 
-const AutocompleteInput = forwardRef(({ onPlaceChange }, ref) => {
+const AutocompleteProduct = forwardRef(({ onPlaceChange }, ref) => {
   const autocompleteInputRef = useRef();
 
   useEffect(() => {
@@ -31,10 +31,10 @@ const AutocompleteInput = forwardRef(({ onPlaceChange }, ref) => {
 
   return (
     <div className="search-products-bar form-floating">
-      <input ref={ref || autocompleteInputRef} type="text" className="input-search-product form-control rounded-pill" id="autocomplete-input" placeholder=" " />
-      <label htmlFor="autocomplete-input">Search products by address...</label>
+      <input ref={ref || autocompleteInputRef} type="text" className="input-search-product form-control" id="autocomplete-input" placeholder=" " />
+      <label htmlFor="autocomplete-input">Location</label>
     </div>
   );
 });
 
-export default AutocompleteInput;
+export default AutocompleteProduct;

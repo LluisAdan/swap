@@ -20,8 +20,6 @@ function RequestItem({ request, onUpdateStatus }) {
     }
   };
 
-  console.log(request.request_owner.phone)
-
   const handleAccept = () => {
     onUpdateStatus(request.id, 'Accepted');
   };
@@ -76,8 +74,15 @@ function RequestItem({ request, onUpdateStatus }) {
       return (
         <React.Fragment>
           <div className="d-flex row justify-content-center align-items-center">
-            <div className="d-flex justify-content-center">
-              <p>User's phone: {request.request_owner.phone}</p>
+            <div className="d-flex row justify-content-center align-items-center">
+              <div className="d-flex justify-content-center align-items-center">
+                <h5>User's contact:</h5>
+              </div>
+
+              <div className="d-flex row justify-content-center align-items-center">
+                <div className="d-flex row justify-content-center align-items-center">{request.request_owner.email}</div>
+                <div className="d-flex row justify-content-center align-items-center">{request.request_owner.phone}</div>
+              </div>
             </div>
 
             <div className="btn-status-finalize d-flex justify-content-center align-items-center">
