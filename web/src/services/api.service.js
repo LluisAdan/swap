@@ -90,3 +90,11 @@ export function getRequests(userId) {
 export function updateRequest(id, data) {
   return http.patch(`/requests/${id}`, data);
 };
+
+export function createLike(productId) {
+  return http.post(`/products/${productId}/like`);
+}
+
+export function deleteLike(productId) {
+  return http.delete(`/products/${productId}/like`);
+}

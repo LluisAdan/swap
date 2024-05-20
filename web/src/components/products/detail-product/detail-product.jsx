@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { getProductDetail, like } from '../../../services/api.service';
+import { getProductDetail, createLike, deleteLike } from '../../../services/api.service';
 import AuthContext from '../../../contexts/auth.context';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import RatingList from '../../ratings/rating-list/rating-list';
 import Map from '../../google/map/map';
+import StarsProduct from '../../stars/stars-product-detail/stars-product';
 
 import './detail-product.css';
 
 function ProductDetail({ lat, lng }) {
   const [product, setProduct] = useState(null);
-  const { user, updateUser } = useContext(AuthContext);  
+  const { user } = useContext(AuthContext);  
   const { id } = useParams();
   const navigate = useNavigate();
   const [isFavorited, setIsFavorited] = useState(false);
@@ -27,10 +28,8 @@ function ProductDetail({ lat, lng }) {
         setProduct(data);
 
         if (user) {
-          if (user.likes) {
-            const isFav = user.likes.some(product => product.product === id)
-            setIsFavorited(isFav);
-          }
+          const isFav = data.likes.some(like => like.like.owner === user.id);
+          setIsFavorited(isFav);
         }
 
       } catch (error) {
@@ -43,14 +42,21 @@ function ProductDetail({ lat, lng }) {
     if (user !== undefined) {
       fetch()
     }
-  }, [id, lat, lng, user]);
+  }, [id, lat, lng, user, isFavorited]);
 
-  const toggleFavorite = () => {
-    const updatedFavorites = isFavorited ? user.likes.filter(productId => productId !== id) : [...user.favoriteProducts, id];
 
-    like(id);
-    console.info(user)
-    setIsFavorited(!isFavorited);
+
+  const toggleFavorite = async () => {
+    try {
+      if (isFavorited) {
+        await deleteLike(id);
+      } else {
+        await createLike(id);
+      }
+      setIsFavorited(!isFavorited);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if(!product) {
@@ -66,10 +72,15 @@ function ProductDetail({ lat, lng }) {
               <img className="rounded-circle object-fit-cover" src={product.owner.avatar} alt={product.owner.avatar} width="60" height="60"/>
             </div>
             <div className="d-flex row">
-              <h5>{product.owner.name} {product.owner.lastName}</h5>
-              <p>Rating</p>
+              <div>
+                <span className="user-name-detail">{product.owner.name} {product.owner.lastName}</span>
+              </div>
+              <div>              
+                <StarsProduct ownerId={product.owner.id} />
+              </div>
             </div>
           </div>
+          {product.owner.id !== user.id && (
           <div className="btns-detail d-flex justify-content-around align-items-center">
             <div>
               <i type="button" className="fa fa-heart-o fa-lg icon-heart" onClick={toggleFavorite}
@@ -80,9 +91,9 @@ function ProductDetail({ lat, lng }) {
                 <Link to={`/products/${product.id}/create-request`}>
                   <button type="button" className="btn-match">Match</button>
                 </Link>
-
               </div>
           </div>
+          )}
         </div>
 
         <div className="d-flex justify-content-center align-items-center">

@@ -1,6 +1,8 @@
 import React from 'react';
+import StarsRating from '../../stars/stars-rating-item/stars-rating-item';
 
 import './rating-item.css';
+
 
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -13,7 +15,14 @@ function RatingItem ({ rating }) {
     <>
       <div className="d-flex row align-items-center">
         <div className="my-2">
-          {rating.rating}
+        <div className="stars d-flex">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <i key={value}
+              className="fa fa-star-o fa-lg"
+              style={{ color: rating.rating >= value ? 'rgb(232, 174, 13)' : 'black' }}>
+            </i>
+          ))}
+        </div>
         </div>
 
         <div>
