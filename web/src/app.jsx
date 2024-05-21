@@ -27,8 +27,9 @@ function App() {
       <main className="swap">
         <Navbar />
         <div className="container content">
+        <AlertProvider>
           <LoadingProvider>
-            <AlertProvider>
+
               <Routes>
                 <Route path="/home" element={<Home/>} />
                 <Route path="/register" element={<CreateUser />} />
@@ -44,8 +45,8 @@ function App() {
                 <Route path="/users/:id/create-rating" element={<PrivateRoute><CreateRating /></PrivateRoute>} />
                 <Route path="*" element={<Navigate to="/home" />} />
               </Routes>
-            </AlertProvider>
           </LoadingProvider>
+        </AlertProvider>
         </div>
       </main>
       {/*<Footer />*/}

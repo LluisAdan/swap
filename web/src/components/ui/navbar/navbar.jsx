@@ -57,7 +57,10 @@ function Navbar() {
               <div className="nav-links d-flex justify-content-center align-items-center">
                 <li className="nav-mailbox d-flex justify-content-center align-items-center">
                   <NavLink className={renderNavLinkActive} to="/profile/mailbox">
-                    <i className={`icon-mailbox fa fa-envelope-o ${pending?.length > 0 ? 'text-danger' : ''}`}></i>
+                    <i className="icon-mailbox fa fa-envelope-o"></i>
+                    {(pending.length > 0) && (
+                      <span className="red-point"></span>
+                    )}
                   </NavLink>
                 </li>
               </div>

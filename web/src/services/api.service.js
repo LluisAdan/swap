@@ -36,9 +36,13 @@ export function updateUser(id, data) {
 };
 
 export function login(data) {
-  return http.post('/login', data).then((response) => {
+  return http.post('/login', data)
+    .then((response) => {
       localStorage.setItem('token', response.data.accessToken);
       return response;
+    })
+    .catch((error) => {
+      throw error;
     });
 };
 

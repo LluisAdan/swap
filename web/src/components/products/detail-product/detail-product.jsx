@@ -5,8 +5,10 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import RatingList from '../../ratings/rating-list/rating-list';
 import Map from '../../google/map/map';
 import StarsProduct from '../../stars/stars-product-detail/stars-product';
+import LoadingContext from '../../../contexts/loading-context/loading-context';
 
 import './detail-product.css';
+import Loading from '../../loading/loading';
 
 function ProductDetail({ lat, lng }) {
   const [product, setProduct] = useState(null);
@@ -14,9 +16,12 @@ function ProductDetail({ lat, lng }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isFavorited, setIsFavorited] = useState(false);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
+
 
   useEffect(() => {
     async function fetch() {
+      setIsLoading(true)
       try {
         const query = {};
         if (lat && lng) {
@@ -28,14 +33,16 @@ function ProductDetail({ lat, lng }) {
         setProduct(data);
 
 
-          const isFav = data.likes.some(like => like.like.owner === user.id);
-          setIsFavorited(isFav);
-        
+        const isFav = data.likes.some(like => like.like.owner === user.id);
+        setIsFavorited(isFav);
+    
 
       } catch (error) {
         if (error.response?.status == 404) {
           navigate('/');
         }
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -56,8 +63,8 @@ function ProductDetail({ lat, lng }) {
     }
   };
 
-  if(!product) {
-    return <div>Loading...</div>
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
@@ -66,18 +73,18 @@ function ProductDetail({ lat, lng }) {
         <div className="info-top-detail d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
             <div className="mx-2">
-              <img className="rounded-circle object-fit-cover" src={product.owner.avatar} alt={product.owner.avatar} width="60" height="60"/>
+              <img className="rounded-circle object-fit-cover" src={product?.owner.avatar} alt={product?.owner.avatar} width="60" height="60"/>
             </div>
             <div className="d-flex row">
               <div>
-                <span className="user-name-detail">{product.owner.name} {product.owner.lastName}</span>
+                <span className="user-name-detail">{product?.owner.name} {product?.owner.lastName}</span>
               </div>
               <div>              
-                <StarsProduct ownerId={product.owner.id} />
+                <StarsProduct ownerId={product?.owner.id} />
               </div>
             </div>
           </div>
-          {product.owner.id !== user?.id && (
+          {product?.owner.id !== user?.id && (
           <div className="btns-detail d-flex justify-content-around align-items-center">
             <div>
               <i type="button" className="fa fa-heart-o fa-lg icon-heart" onClick={toggleFavorite}
@@ -85,7 +92,7 @@ function ProductDetail({ lat, lng }) {
             </div>
 
               <div className="div-btn-match d-flex justify-content-center align-items-center">
-                <Link to={`/products/${product.id}/create-request`}>
+                <Link to={`/products/${product?.id}/create-request`}>
                   <button type="button" className="btn-match">Match</button>
                 </Link>
               </div>
@@ -94,37 +101,37 @@ function ProductDetail({ lat, lng }) {
         </div>
 
         <div className="d-flex justify-content-center align-items-center">
-          <img className="img-product-detail" src={product.image} alt={product.title} />
+          <img className="img-product-detail" src={product?.image} alt={product?.title} />
         </div>
 
         <div className="info-product-detail">
           <div className="product-title-detail">
-            <h2>{product.title}</h2>
+            <h2>{product?.title}</h2>
           </div>
           
           <div className="d-flex justify-content-between">
             <div className="product-price-detail mx-1">
-              <span>{product.price}</span>
+              <span>{product?.price}</span>
             </div>
 
             <div className="d-flex-justify-content-center align-items-center">
-                <span className="product-category-detail d-flex justify-content-center align-items-center">{product.category}</span>
+                <span className="product-category-detail d-flex justify-content-center align-items-center">{product?.category}</span>
             </div>
           </div>
 
           <hr />
           <div className="product-desc-detail">
-            <p>{product.description}</p>
+            <p>{product?.description}</p>
           </div>
           <hr />
         </div>
 
         <div className="map-product d-flex justify-content-center m-20">
-          <Map center={{lat: parseFloat(product.location?.coordinates[1]), lng: parseFloat(product.location?.coordinates[0])}} />
+          <Map center={{lat: parseFloat(product?.location.coordinates[1]), lng: parseFloat(product?.location.coordinates[0])}} />
         </div>
 
         <div className="rating-product-detail">
-          <RatingList ratings={product.owner.ratings}/>
+          <RatingList ratings={product?.owner.ratings}/>
         </div>
       </div>
     </>

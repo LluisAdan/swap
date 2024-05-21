@@ -10,6 +10,7 @@ import './login-user-form.css';
 function Login() {
   const navigate = useNavigate();
   const { doLogin } = useContext(AuthContext);
+  const { showAlert } = useAlert();
 
   const {
     register,
@@ -21,8 +22,8 @@ function Login() {
     try {
       await doLogin(data);
       navigate('/home');
-    } catch (err) {
-      console.log('Invalid credentials');
+    } catch (error) {
+      showAlert('Invalid credentials');
     }
   };
   

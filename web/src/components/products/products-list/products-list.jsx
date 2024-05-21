@@ -3,44 +3,51 @@ import { getProducts, getLikes } from '../../../services/api.service';
 import ProductItem from '../product-item/product-item';
 import { useLocation, useParams } from 'react-router-dom';
 import AuthContext from '../../../contexts/auth.context';
+import LoadingContext from '../../../contexts/loading-context/loading-context';
+import Loading from '../../loading/loading';
 
 import './product-list.css';
 
 function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, onSelected }) {
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const location = useLocation();
   const { user } = useContext(AuthContext); 
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
   const { id } = useParams();
   
   useEffect(() => {
     async function fetch() {
+      setIsLoading(true);
       try {
         let response;
 
         if (user && location.pathname === "/profile/favorites") {
           response = await getLikes(user.id);
-        } else {
-          const query = {};
-          if (category) query.category = category;
-          if (limit) query.limit = limit;
-          if (page) query.page = page;
-          if (lat && lng) {
-            query.lat = lat;
-            query.lng = lng;
+        }
+
+        const query = {};
+        if (category) query.category = category;
+        if (limit) query.limit = limit;
+        if (page) query.page = page;
+        if (lat && lng) {
+          query.lat = lat;
+          query.lng = lng;
         }
         
         response = await getProducts(query);
-        }
+        
         setProducts(response.data);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
     fetch();
-  }, [category, limit, lat, lng, user]);
+  }, [category, limit, lat, lng, user, location.pathname, id, setIsLoading]);
 
-  if (!products) {
-    return <div>Loading...</div>
+  if (isLoading) {
+    return <Loading />;
   };
 
   if (user && location.pathname === ('/profile')) {

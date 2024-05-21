@@ -26,36 +26,39 @@ function CreateRating() {
   };
 
   return (
-    <form className="register d-flex justify-content-center align-items-center" onSubmit={handleSubmit(handleRatingSubmit)}>
     <div className="d-flex justify-content-center align-items-center">
-      <div className="row row-cols-2 w-100 h-100">
+      <form className="create-rating d-flex justify-content-center align-items-center" onSubmit={handleSubmit(handleRatingSubmit)}>
+        <div className="d-flex justify-content-center align-items-center">
+          <div className="d-flex row justify-content-center align-items-center">
 
-        <div className="col d-flex align-items-center">
-          <div className="w-100 form-floating mb-2">
-          <select className={`form-select ${errors.rating ? 'is-invalid' : ''}`} 
-              {...register("rating", { required: "Rating is required" })}>
-                {ratingData.map((rating) => (<option key={rating.option} value={rating.option}>{rating.label}</option>))}
-              </select>
-              <label>Rating</label>
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="input-comment form-floating mb-2">
+                <textarea type="text" className={`form-control ${errors.text ? 'is-invalid' : ''}`} {...register("text")} />
+                <label>Comment</label>
+              </div>
+            </div>
+
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="form-floating mb-2">
+              <select className={`form-select ${errors.rating ? 'is-invalid' : ''}`} 
+                  {...register("rating", { required: "Rating is required" })}>
+                    {ratingData.map((rating) => (<option key={rating.option} value={rating.option}>{rating.label}</option>))}
+                  </select>
+                  <label>Rating</label>
+              </div>
+            </div>
+
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="btn-create-register d-flex justify-content-center align-items-center">
+                <button type="submit" className='submit-form-create btn btn-secondary text-uppercase'>Create rating</button>
+              </div>
+            </div>
+
           </div>
         </div>
-
-        <div className="col d-flex align-items-center">
-          <div className="w-100 form-floating mb-2">
-            <textarea type="text" className={`form-control ${errors.text ? 'is-invalid' : ''}`} {...register("text")} />
-            <label>Comment</label>
-          </div>
-        </div>
-
-        <div className="col d-flex justify-content-around align-items-center">
-          <div className="btn-create-register d-flex justify-content-center align-items-center">
-            <button type="submit" className='submit-form-create btn btn-secondary text-uppercase'>Create rating</button>
-          </div>
-        </div>
-
-      </div>
+      </form>
     </div>
-  </form>
+    
   )
 }
 

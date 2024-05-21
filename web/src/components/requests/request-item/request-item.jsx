@@ -106,7 +106,7 @@ function RequestItem({ request, onUpdateStatus }) {
         </div>
 
         <div className="d-flex justify-content-center my-3">
-          <h5 className="title-product-request">{request.product_owner?.title}</h5>
+            <h5 className="title-product-request">{request.product_owner?.title}</h5>
         </div>
       </Link>
 

@@ -124,3 +124,17 @@
 .icon-mailbox {
   font-size: 25px;
 }
+
+.red-point {
+  margin-left: 2px;
+  background: red;
+  border-radius: 1px;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: red;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  width: 0.5em; 
+  height: 0.5em;
+}

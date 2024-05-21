@@ -1,0 +1,15 @@
+
+.create-rating {
+  background-color: #dfebea;
+  width: 60%;
+  height: 380px;
+  margin-top: 50px;
+  padding: 10px;
+  border: 1px solid #7cb9b5;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
+}
+
+.input-comment {
+  width: 300px;
+}

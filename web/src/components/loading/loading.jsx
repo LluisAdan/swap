@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
-import LoadingContext from './LoadingContext';
+import LoadingContext from '../../contexts/loading-context/loading-context';
 
 const Loading = () => {
   const { isLoading } = useContext(LoadingContext);
 
   return (
-    isLoading && <div className="loading-spinner">Loading...</div>
+    isLoading && (
+    
+      <div className="loading-container">
+        <div className="spinner"></div>
+      </div>
+  )
   );
 };
 

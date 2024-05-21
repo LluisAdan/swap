@@ -74,8 +74,10 @@ function CreateRequest() {
       </div>
 
 
-        <div className="div-btn-create d-flex justify-content-center align-items-center">
-          <button type="submit" className='btn btn-secondary text-uppercase'>Send request</button>
+        <div className="d-flex justify-content-center align-items-center">
+          <div className="btn-create-register d-flex justify-content-center align-items-center">
+            <button type="submit" className='submit-form-create btn btn-secondary text-uppercase'>Send request</button>
+          </div>
         </div>
 
     </form>

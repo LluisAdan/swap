@@ -3,11 +3,13 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../../services/api.service';
 import genreData from '../../../data/genre.json';
+import { useAlert } from '../../../contexts/alert-context/alert.context';
 
 import './create-user-form.css';
 
 function RegisterForm() {
   const navigate = useNavigate();
+  const { showAlert } = useAlert();
 
   const { 
     register, 
@@ -29,6 +31,7 @@ function RegisterForm() {
 
     try {
       const res = await createUser(data);
+      showAlert("USE SUCCESSFULLY CREATED")
       navigate('/login');
     } catch (error) {
       console.error(error);

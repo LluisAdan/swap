@@ -27,14 +27,14 @@ function RatingItem ({ rating }) {
         <div>
           <div className="d-flex align-items-center my-2">
             <img className="rounded-circle object-fit-cover" src={rating.owner.avatar} alt={rating.owner.username}width="40" height="40"/>
-            <h5>{rating.owner.name} {rating.owner.lastName}</h5>
+            <h5 className="mx-2">{rating.owner.name} {rating.owner.lastName}</h5>
           </div>
 
-          <p>{formatDate(rating.createdAt)}</p>
+          <span className="date">{formatDate(rating.createdAt)}</span>
         </div>
 
-        <div>
-          {rating.text}
+        <div className="my-3">
+          <span className="rating-text">{rating.text}</span>
         </div>
       </div>
       <hr />

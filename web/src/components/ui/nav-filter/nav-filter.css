@@ -2,5 +2,56 @@
 .nav-filter {
   height: 180px;
   border-bottom: 1px solid #bddcd9;
-  margin-bottom: 30px;
+}
+
+.div-nav-address {
+  height: 30%;
+}
+
+.div-nav-filters {
+  height: 50%;
+}
+
+.div-btn-categories {
+  height: 60%;
+}
+
+.address-nav {
+  width: 100%;
+  padding: 10px;
+}
+
+.div-btn-filters {
+  height: 40%;
+}
+
+.div-btn-filters :hover {
+  transition: 300ms;
+  font-size: 18px;
+  width: 90px;
+  height: 45px;
+}
+
+.div-btn-filters :link {
+  transition: 300ms;
+}
+
+.btn-filter-nav {
+  width: 80px;
+  height: 40px;
+  padding: 5px;
+  border: 1px solid #bddcd9;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
+  background-color: #bddcd9;
+}
+
+.btn-category-nav {
+  width: 80px;
+  height: 35px;
+  padding: 5px;
+  border: 1px solid #dfebea;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px #3a5957;
+  background-color: #dfebea;
 }
