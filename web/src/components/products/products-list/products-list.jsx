@@ -89,8 +89,9 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   if (location.pathname === '/home') {
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
-          {products.length ? products
+        {products.length ? products
             .filter(product => product.available)
+            .sort((a, b) => new Date(b.createAt) - new Date(a.createAt))
             .map(product => (
                 <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
           )) : <div className="d-flex justify-content-center"><h5>Products not found</h5></div> }
@@ -102,6 +103,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
         {products.length ? products
           .filter(product => product.available)
+          .sort((a, b) => new Date(b.createAt) - new Date(a.createAt))
           .map(product => (
               <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
         )) : <div className="d-flex justify-content-center warning-address"><h5>Products not found near this address</h5></div> }

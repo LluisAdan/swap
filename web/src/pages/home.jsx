@@ -12,12 +12,13 @@ function Home() {
 
   return (
       <PageLayout withFilters={true} filtersTitle={address}>
+        <h4 className="my-4">Last products added:</h4>
         <ProductsList limit={20} page={0} lat={lat} lng={lng} />
-        <ProductSection title={"Electronic:"} category={"Electronic"} />
-        <ProductSection title={"Home:"} category={"Home"} />
-        <ProductSection title={"Sport:"} category={"Sport"} />
-        <ProductSection title={"Fashion:"} category={"Fashion"} />
-        <ProductSection title={"Book, Film and Music:"} category={"Book, Film and Music"} />
+        <ProductSection title={"The most interesting electronic products"} category={"Electronic"} />
+        <ProductSection title={"All kinds of appliances and furniture for your home"} category={"Home"} />
+        <ProductSection title={"Sport products"} category={"Sport"} />
+        <ProductSection title={"What are you wearing today?"} category={"Fashion"} />
+        <ProductSection title={"Book, Film and Music... CULTURE"} category={"Book, Film and Music"} />
         <ProductSection title={"Other:"} category={"Other"} />
       </PageLayout>
   );

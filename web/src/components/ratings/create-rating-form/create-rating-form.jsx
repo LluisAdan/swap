@@ -3,12 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { createRating } from '../../../services/api.service';
 import ratingData from '../../../data/ratings.json';
+import { useAlert } from '../../../contexts/alert-context/alert.context';
 
 import './create-rating-form.css';
 
 function CreateRating() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { showAlert } = useAlert();
 
   const { 
     register, 
@@ -20,6 +22,7 @@ function CreateRating() {
     try {
       await createRating(id, data); 
       navigate('/profile/mailbox');
+      showAlert("RATING CREATE");
     } catch (error) { 
       console.error(error);
     }

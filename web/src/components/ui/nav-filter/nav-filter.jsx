@@ -19,7 +19,7 @@ function NavFilter() {
     <div className="nav-filter d-flex row justify-content-center align-items-center">
       <div className="div-nav-address d-flex justify-content-center align-items-start">
         <div className="address-nav d-flex justify-content-center">
-          <h4>{address ? `These are the Products near "${city[0]}":` : "Welcome to Swap! Swap products with just a few clicks "}</h4>
+          <h4>{address ? `These are the Products near "${city[0]}":` : "Welcome to Swap! Exchange products with just a few clicks "}</h4>
         </div>
       </div>
 
@@ -31,23 +31,23 @@ function NavFilter() {
         <div className="div-btn-categories d-flex justify-content-around align-items-center">
           {filters && (
             <>
-              <div className="div-btn-filters d-flex justify-content-center align-items-center">
-                <button className="btn-category-nav">Electronic</button> 
+              <div className="div-btn-category d-flex justify-content-center align-items-center">
+                <li className="btn-category-nav">Electronic</li> 
               </div>
-              <div className="div-btn-filters d-flex justify-content-center align-items-center">
-                <button className="btn-category-nav">Home</button> 
+              <div className="div-btn-category d-flex justify-content-center align-items-center">
+                <buttlion className="btn-category-nav">Home</buttlion> 
               </div>
-              <div className="div-btn-filters d-flex justify-content-center align-items-center">
-                <button className="btn-category-nav">Sport</button> 
+              <div className="div-btn-category d-flex justify-content-center align-items-center">
+                <linearGradient className="btn-category-nav">Sport</linearGradient> 
               </div>
-              <div className="div-btn-filters d-flex justify-content-center align-items-center">
-                <button className="btn-category-nav">Fashion</button> 
+              <div className="div-btn-category d-flex justify-content-center align-items-center">
+                <li className="btn-category-nav">Fashion</li> 
               </div>
-              <div className="div-btn-filters d-flex justify-content-center align-items-center">
-                <button className="btn-category-nav">Book...</button> 
+              <div className="div-btn-category d-flex justify-content-center align-items-center">
+                <li className="btn-category-nav">Book, Film and Music</li> 
               </div>
-              <div className="div-btn-filters d-flex justify-content-center align-items-center">
-                <button className="btn-category-nav">Other</button> 
+              <div className="div-btn-category d-flex justify-content-center align-items-center">
+                <li className="btn-category-nav">Other</li> 
               </div>
             </>
           )}

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { createRequest } from '../../../services/api.service';
 import ProductsList from '../../products/products-list/products-list';
 import { getProductDetail } from '../../../services/api.service';
+import { useAlert } from '../../../contexts/alert-context/alert.context';
 
 import './create-request-form.css';
 
@@ -12,6 +13,7 @@ function CreateRequest() {
   const { id } = useParams();
   const [productRequested, setProductRequested] = useState(null);
   const [selected, setSelected] = useState();
+  const { showAlert } = useAlert();
 
   const {
     register,
@@ -41,6 +43,7 @@ function CreateRequest() {
         product_target: productRequested.id
       }
       const res = await createRequest(request);
+      showAlert("REQUEST SENT");
       navigate('/profile');
     } catch (error) { 
       console.error(error);

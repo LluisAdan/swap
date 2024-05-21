@@ -12,14 +12,14 @@ export const AlertProvider = ({ children }) => {
     setError(message);
     setTimeout(() => {
       setError(null);
-    }, 5000);
+    }, 3000);
   };
 
   return (
     <AlertContext.Provider value={{ showAlert }}>
       {error && (
         <div className="d-flex justify-content-center">
-          <div className="alert alert-danger alert-errors" role="alert">
+          <div className="alert alert-errors" role="alert">
             {error}
           </div>
         </div>

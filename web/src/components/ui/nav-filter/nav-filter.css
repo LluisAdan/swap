@@ -30,10 +30,7 @@
   font-size: 18px;
   width: 90px;
   height: 45px;
-}
 
-.div-btn-filters :link {
-  transition: 300ms;
 }
 
 .btn-filter-nav {
@@ -46,12 +43,18 @@
   background-color: #bddcd9;
 }
 
+.div-btn-category :hover {
+  transition: 300ms;
+  font-size: 20px;
+  text-decoration-line: underline;
+}
+
 .btn-category-nav {
-  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  list-style: none;
+  width: 200px;
   height: 35px;
   padding: 5px;
-  border: 1px solid #dfebea;
   border-radius: 10px;
-  box-shadow: 0 1px 4px #3a5957;
-  background-color: #dfebea;
 }
