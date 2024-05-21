@@ -75,8 +75,8 @@ function ProductForm() {
             </div>
           </div>
 
-          <div className="col d-flex align-items-center">
-            <div className="create-category form-floating mb-2">
+          <div className="col d-flex align-items-center justify-content-start">
+            <div className="create-price form-floating mb-2">
               <select className={`form-select ${errors.price ? 'is-invalid' : ''}`} 
               {...register("price", { required: "Price is required" })}>
                 {pricesData.map((price) => (<option key={price.option} value={price.option}>{price.label}</option>))}

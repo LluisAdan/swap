@@ -9,11 +9,8 @@ const renderNavLinkActive = ({ isActive }) => isActive ? 'nav-link active' : 'na
 
 function NavUser() {
   const { user, doLogout } = useContext(AuthContext);
-  console.log(user)
 
   if (!user || user === undefined) return <h1>Loading...</h1>
-
-
 
   return (
     <div className="nav-user d-flex align-items-center">

@@ -31,10 +31,14 @@ const AutocompleteProduct = forwardRef(({ onPlaceChange }, ref) => {
 
   return (
     <div className="search-products-bar form-floating">
-      <input ref={ref || autocompleteInputRef} type="text" className="input-search-product form-control" id="autocomplete-input" placeholder=" " />
-      <label htmlFor="autocomplete-input">Location</label>
+      <input ref={ref || autocompleteInputRef} type="text" className="input-search-product form-control" id="autocomplete-product" placeholder=" " />
+      <label htmlFor="autocomplete-product">Location</label>
     </div>
   );
 });
+
+AutocompleteProduct.defaultProps = {
+  
+}
 
 export default AutocompleteProduct;

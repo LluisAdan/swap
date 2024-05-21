@@ -16,7 +16,6 @@ function CreateRating() {
     formState: { errors }
   } = useForm();
 
-
   async function handleRatingSubmit(data) {
     try {
       await createRating(id, data); 

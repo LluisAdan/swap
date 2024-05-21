@@ -21,7 +21,7 @@ function RatingList({ ratings, limit, page }) {
     <div>
       {ratings?.length ? ratings.map(rating => (
         <div key={rating.id}><RatingItem rating={rating}/></div>
-      )) : <h5>NO HAY RATINGS</h5> }
+      )) : <div className="d-flex justify-content-center"><h5>There are no ratings yet</h5></div> }
     </div>
   );
 };

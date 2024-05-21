@@ -43,12 +43,12 @@ function StarsProfile() {
           {[1, 2, 3, 4, 5].map((value) => (
             <i key={value}
               className="fa fa-star-o"
-              style={{ color: avg >= value ? 'rgb(232, 174, 13)' : 'black' }}>
+              style={{ color: avg >= value ? 'rgb(232, 174, 13)' : 'rgb(165, 165, 165)' }}>
             </i>
           ))}
         </div>
         <div className="avg-ratings d-flex justify-content-center align-items-center">
-          <span>{avg}</span>
+          <span>{avg.toFixed(1)}</span>
         </div>
 
         <div className="cant-ratings d-flex justify-content-center align-items-center">        

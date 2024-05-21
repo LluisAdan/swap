@@ -4,6 +4,8 @@ import AuthContext from '../../../contexts/auth.context';
 import RequestItem from '../request-item/request-item';
 import { useNavigate } from 'react-router-dom';
 
+import './requests-list.css';
+
 function RequestsList() {
   const [requests, setRequests] = useState([]);
   const { user } = useContext(AuthContext); 
@@ -41,13 +43,14 @@ function RequestsList() {
   return (
     <div className="d-flex justify-content-center">
       <div>
-        {requests
+        {requests.length ? requests
         .sort((a, b) => {
           if(a.status < b.status) return 1; 
           if(a.status > b.status) return -1; 
           return 0;
         })
-        .map(request => <div className="product-item col"><RequestItem key={request.id} request={request} onUpdateStatus={handleUpdateStatus}/></div>)}
+        .map(request => (<div className="product-item col"><RequestItem key={request.id} request={request} onUpdateStatus={handleUpdateStatus}/></div>
+      )) : <div className="d-flex justify-content-center warning-requests"><h5>No requests yet</h5></div> }
         
       </div>
     </div>

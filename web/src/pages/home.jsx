@@ -6,6 +6,7 @@ function Home() {
   
   return (
       <PageLayout withFilters={true}>
+        <ProductSection isFavorite />
         <ProductSection title={"Electronic:"} category={"Electronic"} />
         <ProductSection title={"Home:"} category={"Home"} />
         <ProductSection title={"Sport:"} category={"Sport"} />

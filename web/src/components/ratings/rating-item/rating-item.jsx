@@ -3,7 +3,6 @@ import StarsRating from '../../stars/stars-rating-item/stars-rating-item';
 
 import './rating-item.css';
 
-
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);

@@ -7,7 +7,7 @@ const autocompleteOptions = {
   type: ['address']
 };
 
-const AutocompleteInput = forwardRef(({ onPlaceChange }, ref) => {
+function AutocompleteInput({ onPlaceChange }) {
   const autocompleteInputRef = useRef();
 
   useEffect(() => {
@@ -31,10 +31,16 @@ const AutocompleteInput = forwardRef(({ onPlaceChange }, ref) => {
 
   return (
     <div className="search-products-bar form-floating">
-      <input ref={ref || autocompleteInputRef} type="text" className="input-search-product form-control rounded-pill" id="autocomplete-input" placeholder=" " />
+      <input ref={autocompleteInputRef} type="text" className="input-search-product form-control rounded-pill" id="autocomplete-input" placeholder=" " />
       <label htmlFor="autocomplete-input">Search products by address...</label>
     </div>
   );
-});
+};
+
+  AutocompleteInput.defaultProps = {
+    onPlaceChange: (location) => console.debug(location)
+  }
+
+
 
 export default AutocompleteInput;

@@ -27,10 +27,10 @@ function ProductDetail({ lat, lng }) {
         const { data } = await getProductDetail(id, query);
         setProduct(data);
 
-        if (user) {
+
           const isFav = data.likes.some(like => like.like.owner === user.id);
           setIsFavorited(isFav);
-        }
+        
 
       } catch (error) {
         if (error.response?.status == 404) {
@@ -39,12 +39,9 @@ function ProductDetail({ lat, lng }) {
       }
     }
 
-    if (user !== undefined) {
       fetch()
-    }
+    
   }, [id, lat, lng, user, isFavorited]);
-
-
 
   const toggleFavorite = async () => {
     try {
@@ -80,7 +77,7 @@ function ProductDetail({ lat, lng }) {
               </div>
             </div>
           </div>
-          {product.owner.id !== user.id && (
+          {product.owner.id !== user?.id && (
           <div className="btns-detail d-flex justify-content-around align-items-center">
             <div>
               <i type="button" className="fa fa-heart-o fa-lg icon-heart" onClick={toggleFavorite}
@@ -104,10 +101,17 @@ function ProductDetail({ lat, lng }) {
           <div className="product-title-detail">
             <h2>{product.title}</h2>
           </div>
+          
+          <div className="d-flex justify-content-between">
+            <div className="product-price-detail mx-1">
+              <span>{product.price}</span>
+            </div>
 
-          <div className="product-price-detail">
-            <p>{product.price}</p>
+            <div className="d-flex-justify-content-center align-items-center">
+                <span className="product-category-detail d-flex justify-content-center align-items-center">{product.category}</span>
+            </div>
           </div>
+
           <hr />
           <div className="product-desc-detail">
             <p>{product.description}</p>

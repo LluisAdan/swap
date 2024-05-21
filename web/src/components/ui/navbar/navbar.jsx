@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import AuthContext from '../../../contexts/auth.context';
-import logo from '../../../assets/logo/logo.png';
+import logo from '../../../assets/logo/IMG_final.png';
 import AutocompleteInput from '../../google/autocomplete/autocomplete-input';
 
 import './navbar.css';
@@ -11,11 +11,6 @@ const renderNavLinkActive = ({ isActive }) => isActive ? 'nav-link active' : 'na
 function Navbar() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const lat = searchParams.get('lat');
-  const lng = searchParams.get('lng');
-  const address = searchParams.get('address');
 
   const pending = user?.target_user.filter(request => request.status.toLowerCase() === 'pending');
 

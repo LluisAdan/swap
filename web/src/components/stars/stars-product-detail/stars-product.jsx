@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { getRatings } from '../../../services/api.service';
 
+import './stars-product.css';
+
 function StarsProduct({ ownerId }) {
   const [avg, setAvg] = useState(0);
   const [cant, setCant] = useState(0);
-
-
 
   useEffect(() => {
     async function fetchRatings() {
@@ -35,12 +35,12 @@ function StarsProduct({ ownerId }) {
           {[1, 2, 3, 4, 5].map((value) => (
             <i key={value}
               className="fa fa-star-o"
-              style={{ color: avg >= value ? 'rgb(232, 174, 13)' : 'black' }}>
+              style={{ color: avg >= value ? 'rgb(255, 150, 3)' : 'rgb(165, 165, 165)' }}>
             </i>
           ))}
         </div>
         <div className="avg-ratings d-flex justify-content-center align-items-center">
-          <span>{avg}</span>
+          <span>{avg.toFixed(1)}</span>
         </div>
 
         <div className="cant-ratings d-flex justify-content-center align-items-center">        

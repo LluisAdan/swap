@@ -55,7 +55,7 @@ function ProductItem({ product, isRequest, selected, onSelected }) {
               <span>{product.price}</span>
             </div>
             <div className="product-category d-flex justify-content-center align-items-center">
-              <span className="product-item-category">{product.category}</span>
+              <span className="product-item-category d-flex justify-content-center align-items-center">{product.category}</span>
             </div>
           </div>
         </div>

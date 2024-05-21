@@ -11,7 +11,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   const location = useLocation();
   const { user } = useContext(AuthContext); 
   const { id } = useParams();
-
+  
   useEffect(() => {
     async function fetch() {
       try {
@@ -37,7 +37,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
       }
     }
     fetch();
-  }, [category, limit, lat, lng]);
+  }, [category, limit, lat, lng, user]);
 
   if (!products) {
     return <div>Loading...</div>
@@ -47,7 +47,7 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
         {products
-          .filter(product => product.owner === user?.id && product.available)
+          .filter(product => product.owner === user.id && product.available)
           .map(product => (
               <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
         ))}
@@ -58,11 +58,11 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   if (user && location.pathname === (`/products/${id}/create-request`)) {
     return (
       <div className={`${isRequest ? 'product-list-request': 'product-list row row-cols-1 row-cols-md-3 row-cols-lg-5'}`}>
-          {products
-            .filter(product => product.owner === user.id && product.available)
+          {products.length ? products
+            .filter(product => (product.owner === user.id) && product.available)
             .map(product => (
                 <div key={product.id} className="product-item col"><ProductItem product={product} isRequest selected={product.id === selected} onSelected={onSelected} /></div>
-          ))}
+          )) : <div className="d-flex justify-content-center"><h5>No products found</h5></div> }
       </div>
     );
   }
@@ -70,12 +70,11 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   if (user && location.pathname === '/profile/favorites') {
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
-          {products
+          {products.length ? products
             .filter(product => product.available)
             .map(product => (
                 <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
-          ))}
-
+          )) : <div className="d-flex justify-content-center warning-favorites"><h5>Favorite products not found</h5></div> }
       </div>
     );
   };
@@ -83,15 +82,24 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
   if (location.pathname === '/home') {
     return (
       <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
-          {products
+          {products.length ? products
             .filter(product => product.available)
             .map(product => (
                 <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
-          ))}
-
+          )) : <div className="d-flex justify-content-center"><h5>Products not found</h5></div> }
       </div>
     );
   };
+
+  return (
+    <div className="product-list row row-cols-1 row-cols-md-3 row-cols-lg-5">
+        {products.length ? products
+          .filter(product => product.available)
+          .map(product => (
+              <div key={product.id} className="product-item col"><ProductItem product={product}/></div>
+        )) : <div className="d-flex justify-content-center warning-address"><h5>Products not found near this address</h5></div> }
+    </div>
+  );
 }
 
 export default ProductsList;
