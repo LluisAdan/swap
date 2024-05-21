@@ -30,8 +30,7 @@ module.exports.list = (req, res, next) => {
 };
 
 module.exports.delete = (req, res, next) => {
-
-  Like.findOneAndDelete()
+  Like.findByAndDelete(req.params.id)
     .then(like => {
       if (!like) {
         return res.status(404).json({ message: 'Like not found' });
