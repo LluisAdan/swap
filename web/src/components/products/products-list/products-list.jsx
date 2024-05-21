@@ -23,6 +23,8 @@ function ProductsList({ category, limit, page,  lat, lng, isRequest, selected, o
 
         if (user && location.pathname === "/profile/favorites") {
           response = await getLikes(user.id);
+          setProducts(response.data);
+          return;
         }
 
         const query = {};

@@ -50,8 +50,8 @@ module.exports.list = (req, res, next) => {
 
   Product.find(criterial)
     .sort({ _id: -1 })
-    .limit(limit)
-    .skip(limit * page)
+    //.limit(limit)
+    //.skip(limit * page)
     .then((products) => res.json(products))
     .catch(next);
 };

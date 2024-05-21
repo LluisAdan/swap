@@ -22,7 +22,7 @@ module.exports.list = (req, res, next) => {
   const userId = req.user.id;
 
   Like.find({ like_owner: userId })
-  .populate("fav_product")
+  .populate("favorite_product")
   .then((likes) => {
     res.json(likes);
   })

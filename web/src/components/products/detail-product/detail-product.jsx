@@ -35,7 +35,6 @@ function ProductDetail({ lat, lng }) {
 
         const isFav = data.likes.some(like => like.like.owner === user.id);
         setIsFavorited(isFav);
-    
 
       } catch (error) {
         if (error.response?.status == 404) {
@@ -111,7 +110,7 @@ function ProductDetail({ lat, lng }) {
           
           <div className="d-flex justify-content-between">
             <div className="product-price-detail mx-1">
-              <span>{product?.price}</span>
+              <span className="pruebaxx">{product?.price}</span>
             </div>
 
             <div className="d-flex-justify-content-center align-items-center">

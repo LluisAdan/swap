@@ -82,28 +82,12 @@
 }
 
 .product-category-detail {
-  margin-top: 8px;
-  height: 30px;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px #3a5957;
-  font-size: 18px;
-  white-space: nowrap; /* Evita el salto de línea */
-  overflow: hidden; /* Oculta el desbordamiento */
-  text-overflow: ellipsis; /* Agrega los puntos suspensivos */
-  width: 70px; /* Establece un ancho fijo para el contenedor */
-  
 }
 
 .product-price-detail {
-
   border-radius: 10px;
   box-shadow: 0 1px 4px #3a5957;
   font-size: 18px;
-  padding: 5px;
-}
-
-.pruebax {
-  
-  border: 1px solid black;
+  padding: 10px;
 }
